@@ -1,7 +1,7 @@
 # R4nd.M1n1ng 
 ***
 ## Un proyecto de Cobra Kode
-
+![](https://github.com/JesusGarnica8684/proyecto-R4M1-pdc/blob/main/logo-cobra-kode.png)
 ***
 ## Colaboradores:
 * Juan Manuel Dávila Dominguez
