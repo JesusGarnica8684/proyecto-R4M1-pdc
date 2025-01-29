@@ -1,6 +1,7 @@
 # R4nd.M1n1ng 
 ***
-## R4-M1
+## Un proyecto de Cobra Kode
+
 ***
 ## Colaboradores:
 * Juan Manuel Dávila Dominguez
