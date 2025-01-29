@@ -51,15 +51,14 @@ flowchart TD
     E2 --> F
     F --> F7["Guardar numero en *caracteres*"]
     F7 --> F8["¿*caracteres* esta entre 3 y 10 (inclusivo)?"]
-    F8 -- Si --> G{"Escoger cantidad de intentos"}
-    G -- 3 --> G1["Asignar valor: *3* a llave: Vidas en *configuracion*"]
+    G{"Escoger cantidad de intentos"} -- 3 --> G1["Asignar valor: *3* a llave: Vidas en *configuracion*"]
     G -- 5 --> G2["Asignar valor: *5* a llave: Vidas en *configuracion*"]
     G -- 10 --> G3["Asignar valor: *10* a llave: Vidas&nbsp;en *configuracion*"]
-    G -- Infinitos --> G4["Asignar valor: *1000* a llave: Vidas&nbsp;en *configuracion*"]
+    G -- Infinitos --> G4["Asignar valor: *Infinitos* a llave: Vidas&nbsp;en *configuracion*"]
     G1 --> H["Generar string con una combinación aleatoria según la confuguración de juego"]
     G2 --> H
     G3 --> H
-    I["Usuario intenta adivinar"] --> n9["Guardar intento en variable: *usuario*"] & n44["Pedir al usuario que ingrese nuevamente el intento"]
+    I["Usuario intenta adivinar"] --> n9["Guardar intento en variable: *usuario*"]
     K{"¿Elemento tiene el mismo indice que el elemento correspondiente en *usuario_lista*?"} -- Si --> L["Sumar 1 a *puntos*"]
     L --> n22["Agregar elemento a *correcto_posicion*"]
     N{"¿*intentos_cuenta* es igual al valor de llave: Vidas&nbsp;en *configuracion*?"} -- No --> I
@@ -80,6 +79,7 @@ flowchart TD
     n9 -- Convertir string a lista --> n5
     n11 -- Convertir string a lista --> n1
     J -- No --> n12["Restar 1 a *puntos*"]
+    n12 --> n44["Pedir al usuario que ingrese nuevamente el intento"]
     n15["Repetir por cada elemento en *usuario_lista*"] --> n31@{ label: "<span style=\"font-family:\">¿En *configuracion*,&nbsp;</span>llave: Capitalizacion el valor es <span style=\"font-family:\">*Mayusculas y Minusculas*?</span><span style=\"font-family:\">&nbsp;</span>" }
     n16["¿El elemento esta en *respuesta_lista*?"] -- No --> n15
     n16 -- Si --> n18["Sumar 1 a *puntos*"]
@@ -98,7 +98,7 @@ flowchart TD
     n27 --> E
     F8 -- No --> n28["Pedir al usuario que ingrese nuevamente la cantidad de caracteres"]
     n28 --> F
-    n19 -- No --> n30["Restar 1 a *intentos_cuenta*"]
+    n19 -- No --> n30["Sumar 1 a *intentos_cuenta*"]
     n30 --> n25
     G4 --> H
     n31 -- Si --> n32["¿El elemento es una letra?"]
@@ -116,11 +116,14 @@ flowchart TD
     n39 -- Si --> N
     n32 -- No --> n16
     n33 -- No --> n15
-    P --> n42@{ label: "<span style=\"--tw-border-spacing-x:\">¿En *configuracion*,&nbsp;</span>llave: Vidas, el valor es&nbsp;<span style=\"--tw-border-spacing-x:\">*1000*?</span><span style=\"--tw-border-spacing-x:\">&nbsp;</span>" }
+    P --> n42@{ label: "<span style=\"--tw-border-spacing-x:\">¿En *configuracion*,&nbsp;</span>llave: Vidas, el valor es&nbsp;<span style=\"--tw-border-spacing-x:\">*Infinitos*?</span><span style=\"--tw-border-spacing-x:\">&nbsp;</span>" }
     n42 -- Si --> n43["Mostrar en pantalla *intentos_cuenta*"]
     n43 --> n41(["Fin"])
     n42 -- No --> n41
-    n12 --> n44
+    n44 --> I
+    F8 -- Si --> n45["Asignar valor de caracteres a llave: Cantidad en *configuracion*"]
+    n45 --> G
+
     n17@{ shape: rect}
     F@{ shape: lean-r}
     F8@{ shape: diam}
@@ -148,7 +151,6 @@ flowchart TD
     n35@{ shape: rect}
     n36@{ shape: diam}
     n42@{ shape: diam}
-
 ```
 ## Código preliminar 
 ```python
