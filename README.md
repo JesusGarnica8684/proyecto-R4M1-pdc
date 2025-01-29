@@ -8,7 +8,28 @@
 * Zaida Alejandra Guzman Martínez
 * Laura Mariana de Jesús García Garnica
 ***
-## Diagrama de Flujo preliminar:
+## Diagramas de flujo preliminares:
+# Diagrama general:
+```mermaid 
+flowchart TD
+    n1(["Inicio"]) --> n2["Coinfiguración de juego"]
+    n2 --> n3["Creación combinación aleatoria"]
+    n3 --> n4["Intento de jugador"]
+    n6["¿Combinación aleatoria e intento de jugador son iguales?"] -- Si --> n7["Ganar"]
+    n6 -- No --> n9["Verificación del intento"]
+    n4 --> n6
+    n9 --> n10["Asignación de puntos"]
+    n10 --> n8["¿Según configuración quedan intentos?"]
+    n8 -- No --> n12["Perder"]
+    n12 --> n13(["Fin"])
+    n7 --> n13
+    n8 -- Si --> n4
+
+    n4@{ shape: lean-r}
+    n6@{ shape: diam}
+    n8@{ shape: diam}
+```
+# Diagrama expandido: 
 ```mermaid
 flowchart TD
     A(["Inicio"]) --> n17@{ label: "<span style=\"font-family:\">Generar e inicializar variables: *caracteres*, *intentos_cuenta* y *puntos* en 0</span>" }
