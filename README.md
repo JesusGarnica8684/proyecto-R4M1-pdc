@@ -150,6 +150,7 @@ flowchart TD
     n42@{ shape: diam}
 
 ```
+## Código preliminar 
 ```python
 import random
 import string
