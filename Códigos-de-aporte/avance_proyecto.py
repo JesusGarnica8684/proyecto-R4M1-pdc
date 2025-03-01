@@ -2,7 +2,7 @@ import random
 import string
 
 
-def configuration_game(configuration:dict):
+def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
     data_value = input("Tipo de caracteres (letras, numeros, ambos): ")
     configuration["Data"] = data_value
 
@@ -15,7 +15,7 @@ def configuration_game(configuration:dict):
     repetition_value = input("Repetición de caracteres (si, no): ")
     configuration["Repetition"] = repetition_value
 
-    while True:
+    while True: # Verificación de cantidad de intentos
         amount_value = int(input("Cantidad de caracteres (3-10): "))
         if amount_value >= 3 and amount_value <= 10:
             configuration["Amount"] = amount_value
@@ -69,4 +69,3 @@ if __name__ == "__main__":
     print(start)
     print(org_chain)
     print(hiden_chain)
-    print("holiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
