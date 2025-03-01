@@ -24,6 +24,10 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
             print("Valor no permitido (3-10)")
 
     lifes_value = input("Intentos (3, 5, 10, infinitos): ")
+    if lifes_value == "infinitos" : 
+        lifes_value = float('inf')
+    else : 
+        lifes_value = int(lifes_value)
     configuration["Lifes"] = lifes_value
 
     return configuration
