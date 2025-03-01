@@ -76,8 +76,8 @@ def combinacion_aleatorea(configuration:dict):
 
     return chain_list
 #-----------------------------------------------------------------------------------------------
-def validar_entrada(usuario_input: str, configuration: dict) -> bool:
-    #Verifica si la entrada del usuario contiene solo caracteres permitidos.
+def validar_entrada(usuario_input:str, configuration:dict) -> bool:
+    # Verifica si la entrada del usuario contiene solo caracteres permitidos.
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         if configuration["Capital"] == "mayusculas":
@@ -90,7 +90,7 @@ def validar_entrada(usuario_input: str, configuration: dict) -> bool:
     if configuration["Data"] == "numeros" or configuration["Data"] == "ambos":
         allowed_characters += string.digits
 
-    if all(char in allowed_characters for char in usuario_input) == False : 
+    if all(char in allowed_characters for char in usuario_input) == False: 
         return "ingresaste mal un caracter intentalo de nuevo"
     else:
         return None
