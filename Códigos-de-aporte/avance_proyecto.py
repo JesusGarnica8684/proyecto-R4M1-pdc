@@ -65,8 +65,13 @@ def combinacion_aleatorea(configuration:dict):
         chain = "".join(random.sample(options_string, lon))
     else:
         chain = "".join(random.choices(options_string, k = lon))
-        
-    return chain
+ 
+    # Convertir cadena a lista
+    chain_list = []
+    for elem in chain:
+        chain_list.append(elem)
+
+    return chain_list
 
 if __name__ == "__main__":
     configuration = {}
