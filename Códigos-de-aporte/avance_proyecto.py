@@ -1,6 +1,6 @@
 import random
 import string
-
+import tabulate
 
 def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
     data_value = input("Tipo de caracteres (letras, numeros, ambos): ")
