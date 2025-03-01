@@ -34,7 +34,7 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
     else: 
         lifes_value = int(lifes_value)
     configuration["Lifes"] = lifes_value
-    
+
     # Imprimir el diccionario en forma de tabla
     configuration_tab = tabulate(configuration.items(), tablefmt= "grid")
 
@@ -79,11 +79,13 @@ def combinacion_aleatorea(configuration:dict):
 if __name__ == "__main__":
     configuration = {}
 
+    print("Bienvenido a R4nd.M1n1ng")
+    print("\nEscoga como quiere jugar")
+
     start = configuration_game(configuration)
     org_chain = combinacion_aleatorea(configuration)
     hiden_chain = "*" * len(org_chain)
 
-    print("Bienvenido a R4nd.M1n1ng")
-    print(start)
+    print(f"\n{start}")
     print(org_chain)
     print(hiden_chain)
