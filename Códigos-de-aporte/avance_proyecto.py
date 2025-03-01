@@ -3,19 +3,23 @@ import string
 import tabulate
 
 def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
+    # Caracteres
     data_value = input("Tipo de caracteres (letras, numeros, ambos): ")
     configuration["Data"] = data_value
 
+    # Capitalización
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         capital_value = input("Capitalizacion de letras (mayusculas, minusculas, ambas): ")
         configuration["Capital"] = capital_value
     else:
         pass
-
+    
+    # Repetición
     repetition_value = input("Repetición de caracteres (si, no): ")
     configuration["Repetition"] = repetition_value
-
-    while True: # Verificación de cantidad de intentos
+    
+    # Verificación de cantidad de intentos
+    while True:
         amount_value = int(input("Cantidad de caracteres (3-10): "))
         if amount_value >= 3 and amount_value <= 10:
             configuration["Amount"] = amount_value
@@ -23,17 +27,19 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
         else:
             print("Valor no permitido (3-10)")
 
+    # Vidas (intentos para adivinar)
     lifes_value = input("Intentos (3, 5, 10, infinitos): ")
-    if lifes_value == "infinitos" : 
+    if lifes_value == "infinitos": 
         lifes_value = float('inf')
-    else : 
+    else: 
         lifes_value = int(lifes_value)
     configuration["Lifes"] = lifes_value
 
     return configuration
 
 def combinacion_aleatorea(configuration:dict):
-    options = []
+    # Lista para guardar los caracteres con los que se genera la cadena
+    options = [] 
     mayus = string.ascii_uppercase # Mayusculas
     minus = string.ascii_lowercase # Minusculas
     mayus_minus = string.ascii_letters # Ambas
@@ -52,9 +58,9 @@ def combinacion_aleatorea(configuration:dict):
         options.append(nume)
     
     options_string = "".join(options)
-
     lon = configuration["Amount"]
 
+    # Generar cadena aleatoria
     if configuration["Repetition"] == "no":
         chain = "".join(random.sample(options_string, lon))
     else:
