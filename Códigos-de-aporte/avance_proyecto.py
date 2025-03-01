@@ -1,6 +1,6 @@
 import random
 import string
-import tabulate
+from tabulate import tabulate
 
 def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
     # Caracteres
@@ -34,8 +34,11 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
     else: 
         lifes_value = int(lifes_value)
     configuration["Lifes"] = lifes_value
+    
+    # Imprimir el diccionario en forma de tabla
+    configuration_tab = tabulate(configuration.items(), tablefmt= "grid")
 
-    return configuration
+    return configuration_tab
 
 def combinacion_aleatorea(configuration:dict):
     # Lista para guardar los caracteres con los que se genera la cadena
