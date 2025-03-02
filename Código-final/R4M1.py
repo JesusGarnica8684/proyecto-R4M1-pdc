@@ -249,7 +249,6 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> int:
 
 if __name__ == "__main__":
     configuration = {}
-    score: int = 0
 
     print("\n...Bienvenido a...")
     print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
