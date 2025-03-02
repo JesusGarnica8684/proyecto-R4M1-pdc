@@ -9,7 +9,7 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
 ### **1. configuración del juego** 
 * configuration_game
-***
+  
 Antes de iniciar el juego el usuario debe configurar ciertas reglas, para esto, esta funcion solicita los parametros para la partida, como son: Tipo de caracteres, capitalizacion, cantidad de caracteres, si hay repeticion, y la cantidad de vidas. y devuelve un diccionario con sus valores asignados.
 ## Diagramas de flujo preliminares:
 # Diagrama general:
