@@ -77,7 +77,7 @@ def combinacion_aleatorea(configuration:dict):
     return chain_list
 #-----------------------------------------------------------------------------------------------
 def validar_entrada(usuario_input:str, configuration:dict) -> bool:
-    # Verifica si la entrada del usuario contiene solo caracteres permitidos.
+    #Verifica si la entrada del usuario contiene solo caracteres permitidos.
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         if configuration["Capital"] == "mayusculas":
@@ -90,13 +90,23 @@ def validar_entrada(usuario_input:str, configuration:dict) -> bool:
     if configuration["Data"] == "numeros" or configuration["Data"] == "ambos":
         allowed_characters += string.digits
 
-    if all(char in allowed_characters for char in usuario_input) == False: 
-        return "ingresaste mal un caracter intentalo de nuevo"
+    if all(char in allowed_characters for char in usuario_input) == False : 
+        return "ingresaste mal un caracter, intentalo de nuevo"
     else:
         return None
 
+def comparar_existencia(usuario_input:str, org_chain:str) -> list:
+    #Crea una lista de los caracteres que coinciden en ambas listas.
+    return [char for char in set(usuario_input) if char in org_chain]
 
-
+def comparar_indice_aparicion(usuario_input:str, org_chain:str) -> dict:
+    #Crea un diccionario con los caracteres que coinciden en posicion.
+    indices = {}
+    for char in set(usuario_input):
+        if char in org_chain:
+            indices[char] = [i for i, c in enumerate(org_chain) if c == char]
+    return indices
+#-----------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     configuration = {}
 
