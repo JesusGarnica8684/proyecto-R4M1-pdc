@@ -2,7 +2,7 @@ print ("(づ ◕‿◕ )づ")
 print ("(乛-乛)")
 print ("( ˘ ³˘)♥")
 print ("(˶ ⚈ Ɛ ⚈ ˵)")
-print ("(•ิ _•ิ ).")
+print ("(•ิ _•ิ )?")
 
 
 vidas : int 
