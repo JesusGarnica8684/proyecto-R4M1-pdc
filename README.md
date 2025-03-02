@@ -202,3 +202,5 @@ def combinacion_aleatorea(configuracion:dict, lon:int):
 ---
 # Referencias
 * https://labex.io/es/tutorials/python-how-to-implement-time-delays-in-python-420943
+* https://www.geeksforgeeks.org/how-to-add-time-delay-in-python/
+* https://www.reddit.com/r/learnpython/comments/qa1g75/how_to_print_one_character_at_a_time_slowly_in/?rdt=52729
