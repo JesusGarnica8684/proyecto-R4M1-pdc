@@ -46,7 +46,7 @@ def configuration_game(configuration:dict) -> dict:
     # Vidas (intentos para adivinar)
     while True:
         lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
-        if lifes_value in {3, 5, 10, "infinitos"}:
+        if lifes_value in {3, 5, 10} or lifes_value :
             if lifes_value == "infinitos": 
                 lifes_value = float('inf')
             else: 
@@ -101,15 +101,29 @@ def combinacion_aleatorea(configuration:dict) -> list:
 # Crea una lista con los caracteres que coinciden en posicion
 def compare_index(user_chain:str, org_chain:str, score:int) -> list:
     both_index = []
-    for char in user_chain:
-        index = enumerate(org_chain) 
-        if char in org_chain:
-            for i, c in index:
-                if c == char:
-                    both_index.append(i)
-    for _ in both_index:
-        score += 1
-    return both_index
+    bot = zip(org_chain, user_chain)
+    both = list(bot)
+    for org, user in both:
+        if org == user:
+            both_index.append(user)
+        else:
+            pass 
+
+    match len(both_index):
+        case 0:
+            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+        case 1:
+            score += 1
+            print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
+            print ("+ (1) punto")
+        case _:
+            for _ in both_index:
+                score += 1
+            print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
+            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+            print (f"+ ({len(both_index)}) puntos")
+
+    return score
 
 # Crea una lista de los caracteres que coinciden en ambas listas
 def compare_exist(user_chain:str, org_chain:str, score:int) -> list:
@@ -117,17 +131,23 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> list:
     for char in user_chain:
         if char in org_chain:
             in_both.append(char)
+        else:
+            pass
 
-    if not in_both: # Si la lista esta vacia
-        print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
-    elif len(in_both) >= 3:
-        print (f"Parece que {str(in_both)} estan en la posicion correcta!!")
-        print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
-        print ("+ (2) punto")
-    elif len(in_both) == 1:
-        print (f"Parece que {str(in_both)} esta en la posicion correcta!!")
-        print ("+ (1) punto")
-    
+    match len(in_both):
+        case 0:
+            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+        case 1:
+            score += 1
+            print (f"Parece que {str(in_both)} esta en la cadena!!")
+            print ("+ (1) punto")
+        case _:
+            for _ in in_both:
+                score += 1
+            print (f"Parece que {str(in_both)} estan en la cadena!!")
+            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+            print (f"+ ({len(in_both)}) puntos")
+
     return in_both
 
 if __name__ == "__main__":
@@ -149,3 +169,5 @@ if __name__ == "__main__":
     print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
 
     user_chain = input("Ingresa tu secuencia de inicio: ")
+    play = compare_exist(user_chain, org_chain, score)
+    play_b = compare_index(user_chain, org_chain, score)
