@@ -25,7 +25,8 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
             configuration["Amount"] = amount_value
             break
         else:
-            print("Te dije que 3 a 10 . _.)")
+            print("Te dije que 3 a 10!!!")
+            print("Puedes usar 3, 4, 5, 6 ... ಠ_ʖಠ ... 7, 8, 9, 10")
 
     # Vidas (intentos para adivinar)
     lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
@@ -91,5 +92,4 @@ if __name__ == "__main__":
     print(org_chain)
 
     hiden_chain = "*" * len(org_chain)
-    print(hiden_chain)
-
+    print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
