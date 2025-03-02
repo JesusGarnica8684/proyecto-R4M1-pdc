@@ -1,7 +1,9 @@
-# R4nd.M1n1ng 
+# **R4nd.M1n1ng**
 ***
 ## Un proyecto de Cobra Kode
 ![](https://github.com/JesusGarnica8684/proyecto-R4M1-pdc/blob/main/Logo/logo-cobra-kode.png?raw=true)
+## Introduccion 
+El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng**, un juego el cual consiste en la generacion y adivinanza de una serie de caracteres aleatorios. El objetivo es que el usuario descubra la secuencia ocualta mediante intentos sucesivos y un sistema de puntuacion.
 ## Diagramas de flujo preliminares:
 # Diagrama general:
 ```mermaid 
