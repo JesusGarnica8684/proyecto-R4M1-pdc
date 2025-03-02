@@ -2,7 +2,6 @@
 ***
 ## Un proyecto de Cobra Kode
 ![](https://github.com/JesusGarnica8684/proyecto-R4M1-pdc/blob/main/Logo/logo-cobra-kode.png?raw=true)
-***
 ## Colaboradores:
 * Juan Manuel Dávila Dominguez
 * Zaida Alejandra Guzman Martínez
