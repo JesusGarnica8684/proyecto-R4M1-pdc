@@ -1,3 +1,7 @@
+import random
+import string
+from tabulate import tabulate
+
 #Def string a lista (va a utilizarse tanto para lista con la respuesta como la que ingresar el usuario) 
 def strToList (secuencia : str) -> list:
     return list(secuencia)
@@ -21,34 +25,34 @@ def compareLengths (listR, listU : list) -> int:
     return score
         
 #Def comparar mayusculas minúsculas de las listas
-def compareCapnoCap (strU: str, listR: list) -> int:
+def compareCapnoCap (listR: list, listU : list) -> int:
     score : int = 0
+    capU : list = []
+    noCapU : list = []
+    for i in listU:
+        if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
+            capU.append(i)
+        elif i.isalpha() and i.islower():  # Verificar si el carácter es alfabético y minúscula
+            noCapU.append(i) 
     for i in listR:
-        if i in strU: 
-            if i in noCapU:
-                score += 2
-                print (f"Oh! parece que {listR[i]} si se encuentra en la lista tanto en mayuscula como minuscula")
-                print ("Un piko por inteliegente ( ˘ ³˘)♥")
-                print ("Mas (2) puntos")
-        elif i in capU: 
-            if i not in noCapU:
-                score += 1
-                print (f"Oh! parece que {listR[i]} si se encuentra en la lista en mayuscula pero no en minuscula")
-                print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
-                print ("(+1) punto")
-        elif i not in capU: 
-            if i in noCapU:
-                score += 1
-                print (f"Oh! parece que {listR[i]} si se encuentra en la lista en minuscula pero no en mayuscula")
-                print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
-                print ("Mas (1) punto")
+        if i in capU and i in noCapU:
+            score += 2
+            print (f"Oh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
+            print ("Un piko por inteliegente ( ˘ ³˘)♥")
+            print ("(+2) puntos")
+        elif i in capU and i not in noCapU:
+            score += 1
+            print (f"Oh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
+        elif i not in capU and i in noCapU:
+            score += 1
+            print (f"Oh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
         else:  
-            print ("Ah dale, obvio, claro (•ิ _•ิ ).")  
+            print ("Ah dale, obvio, claro, claro (•ิ _•ิ ).")  
     return score  
-
-import random
-import string
-from tabulate import tabulate
 
 def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
     # Caracteres
@@ -156,7 +160,7 @@ if __name__ == "__main__":
         print ("GAME OVER, POR FEA")
     elif score == 0:
         print ("INICIA PARTIDA （*＾ワ＾*）")
-        score += compareCapnoCap(user_chain, l_original)
+        score += compareCapnoCap(l_original, l_user)
 
 
 
