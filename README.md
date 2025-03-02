@@ -199,6 +199,11 @@ def combinacion_aleatorea(configuracion:dict, lon:int):
     return respuesta_lista
 ```
 ---
+## Colaboradores:
+* Juan Manuel Dávila Dominguez
+* Zaida Alejandra Guzman Martínez
+* Laura Mariana de Jesús García Garnica
+***
 # Referencias
 * https://labex.io/es/tutorials/python-how-to-implement-time-delays-in-python-420943
 * https://www.geeksforgeeks.org/how-to-add-time-delay-in-python/
