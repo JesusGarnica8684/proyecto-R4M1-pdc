@@ -1,6 +1,98 @@
 import random
 import string
 from tabulate import tabulate
+import time 
+
+#Def print de carga, for a dramatic flare 
+
+def cargando(text: str):
+    for i in text: # recorre cada caracter del string
+        print(i, end="") # va imprimiendolo uno por uno conforme avanza
+        time.sleep(0.2) # retrasa la siguiente accion 2 decimas de segundo
+
+#Def string a lista (va a utilizarse tanto para lista con la respuesta como la que ingresar el usuario) 
+def strToList (secuencia : str) -> list:
+    return list(secuencia)
+
+#Def comparar lista- respuesta con lista-usuario (se revisa que las dos sean iguales de largas, sino, se resta 1 punto)
+def compareLengths (listR, listU : list) -> int:
+    score : int = 0
+    if len(listR) == len(listU):
+        score = 0
+        print("LGFG!!! Son del mismo largo (づ ◕‿◕ )づ")
+    elif len(listR) > len(listU):
+        score = -1
+        print("Tch!!! la secuencia es mas larga de lo que ingresaste")
+        time.sleep(2)
+        print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        time.sleep(2)
+        cargando("(-1) punto, por atembao") 
+    else: 
+        score = -1
+        print("Tch!!! la secuencia es mas corta de lo que ingresaste")
+        time.sleep(2)
+        print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        time.sleep(2)
+        cargando("(-1) punto, por atembao") 
+    return score
+        
+#Def comparar mayusculas minúsculas de las listas
+def compareCapnoCap (listR: list, listU : list) -> int:
+    score : int = 0
+    capU : list = []
+    noCapU : list = []
+    for i in listU:
+        if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
+            capU.append(i)
+        elif i.isalpha() and i.islower():  # Verificar si el carácter es alfabético y minúscula
+            noCapU.append(i) 
+    for i in listR:
+        if i in capU and i in noCapU:
+            score += 2
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
+            print ("Un piko por inteliegente ( ˘ ³˘)♥")
+            print ("(+2) puntos")
+        elif i in capU and i not in noCapU:
+            score += 1
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
+        elif i not in capU and i in noCapU:
+            score += 1
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
+        else:  
+            time.sleep(2)
+            cargando ("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+    return score  
+
+def validar_entrada(usuario_input:str, configuration:dict) -> bool:
+    #Verifica si la entrada del usuario contiene solo caracteres permitidos.
+    allowed_characters = ""
+    if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
+        if configuration["Capital"] == "mayusculas":
+            allowed_characters += string.ascii_uppercase
+        elif configuration["Capital"] == "minusculas":
+            allowed_characters += string.ascii_lowercase
+        elif configuration["Capital"] == "ambas":
+            allowed_characters += string.ascii_letters
+
+    if configuration["Data"] == "numeros" or configuration["Data"] == "ambos":
+        allowed_characters += string.digits
+
+    if all(char in allowed_characters for char in usuario_input) == False : 
+        validacion : bool = False
+        cargando (". . .")
+        print ("Mmm... \n")
+        print ("¿No recuerdas como configuraste la partida?(ﾉಠдಠ)ﾉ︵┻━┻")
+    else:
+        validacion : bool = True
+        cargando ("♥°˖✧°˖✧°˖✧°˖✧°˖✧◝(⁰▿⁰)◜✧˖°✧˖°✧˖°✧˖°♥")
+    return validacion 
 
 # Pregunta al jugador como quiere jugar
 def configuration_game(configuration:dict) -> dict: 
@@ -168,6 +260,37 @@ if __name__ == "__main__":
     hiden_chain = "*" * len(org_chain)
     print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
 
+    l_original = strToList(org_chain)
     user_chain = input("Ingresa tu secuencia de inicio: ")
-    play = compare_exist(user_chain, org_chain, score)
-    play_b = compare_index(user_chain, org_chain, score)
+    l_user = strToList(user_chain)
+    score : int = compareLengths(l_original, l_user)
+    flag : bool = validar_entrada(user_chain, configuration)
+    
+    if score == -1 and flag == False:
+        print ("Revisa bien la configuracion con la que estas jugando:")
+        print(f"\n{start}")
+        cargando (". . .")
+        print ("¿Ya?")
+        user_chain = input("Ingresa la secuencia de inicio de nuevo, esta vez hazlo bien. (乛-乛)")
+        l_user = strToList(user_chain)
+        score : int = -1
+    elif score == -1 and flag == False:
+        print ("GAME OVER, POR FEA")
+
+    elif score == 0:
+        print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+
+        if configuration.get("Lifes") == "infinitos":
+            match configuration.values():
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                    score += compareCapnoCap(l_original, l_user)
+        if configuration.get("Lifes") in {3, 5, 10}:
+            match configuration.values():
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                    lifes = configuration.get("Lifes")
+                    for _ in range(lifes):
+                        score += compareCapnoCap(l_original, l_user)
+
+    #user_chain = input("Ingresa tu secuencia de inicio: ")
+    #play = compare_exist(user_chain, org_chain, score)
+    #play_b = compare_index(user_chain, org_chain, score)

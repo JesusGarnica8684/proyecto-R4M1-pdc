@@ -225,7 +225,9 @@ if __name__ == "__main__":
         if configuration.get("Lifes") in {3, 5, 10}:
             match configuration.values():
                 case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                    score += compareCapnoCap(l_original, l_user)
+                    lifes = configuration.get("Lifes")
+                    for _ in range(lifes):
+                        score += compareCapnoCap(l_original, l_user)
                     
 
 
