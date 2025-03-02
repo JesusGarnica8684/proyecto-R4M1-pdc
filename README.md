@@ -97,6 +97,185 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
         flag = False 
     return score, flag
 ```
+- compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+
+Esta funcion identifica los caracteres que coinciden en posicion en ambas listas. 
+
+```python
+def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]:
+    both_index = []
+    bot = zip(org_chain, user_chain)
+    both = list(bot)
+    for org, user in both:
+        if org == user:
+            both_index.append(user)
+        else:
+            pass 
+
+    match len(both_index):
+        case 0:
+            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+        case 1:
+            score += 1
+            print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
+            print ("+ (1) punto")
+        case _:
+            for _ in both_index:
+                score += 1
+            print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
+            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+            print (f"+ ({len(both_index)}) puntos")
+    return score, flag
+```
+- compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+
+Evalúa qué caracteres de la entrada del usuario están presentes en la cadena correcta, sin importar la posición. 
+
+```python
+def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
+    in_both = []
+    for char in user_chain:
+        if char in org_chain:
+            in_both.append(char)
+        else:
+            pass
+
+    match len(in_both):
+        case 0:
+            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+        case 1:
+            score += 1
+            print (f"Parece que {str(in_both)} esta en la cadena!!")
+            print ("+ (1) punto")
+        case _:
+            for _ in in_both:
+                score += 1
+            print (f"Parece que {str(in_both)} estan en la cadena!!")
+            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+            print (f"+ ({len(in_both)}) puntos")
+    return score, flag 
+```
+### Funciones del juego 
+- validar_entrada(usuario_input: str, configuration: dict) -> bool
+
+Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
+```python
+    allowed_characters = ""
+    if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
+        if configuration["Capital"] == "mayusculas":
+            allowed_characters += string.ascii_uppercase
+        elif configuration["Capital"] == "minusculas":
+            allowed_characters += string.ascii_lowercase
+        elif configuration["Capital"] == "ambas":
+            allowed_characters += string.ascii_letters
+
+    if configuration["Data"] == "numeros" or configuration["Data"] == "ambos":
+        allowed_characters += string.digits
+
+    if all(char in allowed_characters for char in usuario_input) == False : 
+        validacion : bool = False
+        cargando (". . .")
+        print ("Mmm... \n")
+        print ("¿No recuerdas como configuraste la partida?(ﾉಠдಠ)ﾉ︵┻━┻")
+    else:
+        validacion : bool = True
+        cargando ("♥°˖✧°˖✧°˖✧°˖✧°˖✧◝(⁰▿⁰)◜✧˖°✧˖°✧˖°✧˖°♥")
+    return validacion 
+```
+- configuration_game(configuration: dict) -> dict
+
+Pide al usuario definir los parametros con los q va a jugar, parametro como: tipo de caracter, mayusculas / minusculas, repeticion de caracteres, etc.
+```python
+def configuration_game(configuration:dict) -> dict: 
+    while True:
+        data_value = input("    1- Tipo de caracteres (letras, numeros, ambos): ")
+        if data_value in {"letras", "numeros", "ambos"}:
+            configuration["Data"] = data_value
+            break
+        else:
+            print("No esta dentro de las opciones (⩺_⩹)")
+
+    if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
+        while True:
+            capital_value = input("    2- Capitalizacion de letras (mayusculas, minusculas, ambas): ")
+            if capital_value in {"mayusculas", "minusculas", "ambas"}:
+                configuration["Capital"] = capital_value
+                break
+            else:
+                print("No esta dentro de las opciones (⩺_⩹)")
+    else:
+        pass
+    
+    while True:
+        repetition_value = input("    3- Repetición de caracteres (si, no): ")
+        if repetition_value == "si" or repetition_value == "no":
+            configuration["Repetition"] = repetition_value
+            break
+        else:
+            print("ಠ_ʖಠ ... si o no")
+    
+    while True:
+        amount_value = int(input("    4- Cantidad de caracteres (3-10): "))
+        if amount_value >= 3 and amount_value <= 10:
+            configuration["Amount"] = amount_value
+            break
+        else:
+            print("Puedes usar 3, 4, 5, 6 ... ಠ_ʖಠ ... 7, 8, 9, 10")
+
+    while True:
+        lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
+        if lifes_value in {3, 5, 10} or lifes_value :
+            if lifes_value == "infinitos": 
+                lifes_value = float('inf')
+            else: 
+                lifes_value = int(lifes_value)
+            configuration["Lifes"] = lifes_value
+            break
+        else:
+            print("Opcion NO disponible -(`෴´)- ")
+
+    configuration_tab = tabulate(configuration.items(), tablefmt= "grid")
+
+    return configuration_tab
+```
+- combinacion_aleatorea(configuration: dict) -> list
+
+Genera la cadena aleatoria basada en las configuraciones.
+```python
+def combinacion_aleatorea(configuration:dict) -> list: 
+    options = [] 
+    mayus = string.ascii_uppercase # Mayusculas
+    minus = string.ascii_lowercase # Minusculas
+    mayus_minus = string.ascii_letters # Ambas
+    nume = string.digits # Numeros
+
+    if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
+        match configuration["Capital"]:
+            case "mayusculas":
+                options.append(mayus)
+            case "minusculas":
+                options.append(minus)
+            case "ambas":
+                options.append(mayus_minus)
+
+    if configuration["Data"] == "numeros" or configuration["Data"] == "ambos":
+        options.append(nume)
+    
+    options_string = "".join(options)
+    lon = configuration["Amount"]
+
+    # Generar cadena aleatoria
+    if configuration["Repetition"] == "no":
+        chain = "".join(random.sample(options_string, lon))
+    else:
+        chain = "".join(random.choices(options_string, k = lon))
+ 
+    chain_list = []
+    for elem in chain:
+        chain_list.append(elem)
+
+    return chain_list
+```
 ***
 ## Diagramas de flujo preliminares:
 # Diagrama general:
