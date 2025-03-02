@@ -201,4 +201,4 @@ def combinacion_aleatorea(configuracion:dict, lon:int):
 ```
 ---
 # Referencias
-*https://labex.io/es/tutorials/python-how-to-implement-time-delays-in-python-420943
+* https://labex.io/es/tutorials/python-how-to-implement-time-delays-in-python-420943
