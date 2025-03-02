@@ -9,7 +9,7 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
 
 ### Funciones de utilidades 
-###- cargando (text: str):
+### -cargando (text: str):
 
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
 ```python
@@ -18,7 +18,7 @@ def cargando(text: str):
         print(i, end="") 
         time.sleep(0.2) 
 ```
-###- strToList(secuencia: str) -> list
+### -strToList(secuencia: str) -> list
 
 Convierte un string en una lista de caracteres para facilitar el analisis de datos. 
 ```python
@@ -26,7 +26,7 @@ def strToList (secuencia : str) -> list:
     return list(secuencia) 
 ```
 ### Funciones de validación y comparación 
-###- compareLengths(listR: list, listU: list) -> int
+### -compareLengths(listR: list, listU: list) -> int
 
 Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden penaliza al usuario.
 ```python
@@ -51,7 +51,7 @@ def compareLengths (listR, listU : list) -> int:
         cargando("(-1) punto, por atembao") 
     return score
 ```
-###- compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]
+### -compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]
 
 Esta funcion identifica los caracteres con capitalizacion correcta en la respuesta del usuario en comparacion con la secuencia oculta y otorga los respectivos puntos. 
 
@@ -97,7 +97,7 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
         flag = False 
     return score, flag
 ```
-###- compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+### -compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
 
 Esta funcion identifica los caracteres que coinciden en posicion en ambas listas. 
 
@@ -127,7 +127,7 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]
             print (f"+ ({len(both_index)}) puntos")
     return score, flag
 ```
-###- compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+### -compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
 
 Evalúa qué caracteres de la entrada del usuario están presentes en la cadena correcta, sin importar la posición. 
 
@@ -156,7 +156,7 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
     return score, flag 
 ```
 ### Funciones del juego 
-###- validar_entrada(usuario_input: str, configuration: dict) -> bool
+### -validar_entrada(usuario_input: str, configuration: dict) -> bool
 
 Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
 ```python
@@ -182,7 +182,7 @@ Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres
         cargando ("♥°˖✧°˖✧°˖✧°˖✧°˖✧◝(⁰▿⁰)◜✧˖°✧˖°✧˖°✧˖°♥")
     return validacion 
 ```
-###- configuration_game(configuration: dict) -> dict
+### -configuration_game(configuration: dict) -> dict
 
 Pide al usuario definir los parametros con los q va a jugar, parametro como: tipo de caracter, mayusculas / minusculas, repeticion de caracteres, etc.
 ```python
@@ -238,7 +238,7 @@ def configuration_game(configuration:dict) -> dict:
 
     return configuration_tab
 ```
-###- combinacion_aleatorea(configuration: dict) -> list
+### -combinacion_aleatorea(configuration: dict) -> list
 
 Genera la cadena aleatoria basada en las configuraciones.
 ```python
