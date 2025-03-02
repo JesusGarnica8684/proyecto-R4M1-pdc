@@ -214,15 +214,17 @@ if __name__ == "__main__":
         score : int = -1
     elif score == -1 and flag == False:
         print ("GAME OVER, POR FEA")
+
     elif score == 0:
-        print("\nINICIA PARTIDA （*＾ワ＾*）".center(" "))
-        if {"Lifes":"infinitos"}:
+        print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+
+        if configuration.get("Lifes") == "infinitos":
             match configuration.values():
-                case {"Data":"letras", "Repetition":"si", "Capital":"ambas"}:
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
                     score += compareCapnoCap(l_original, l_user)
-        if {"Lifes":3} or {"Lifes":5} or {"Lifes":10}:
+        if configuration.get("Lifes") in {3, 5, 10}:
             match configuration.values():
-                case {"Data":"letras", "Repetition":"si", "Capital":"ambas"}:
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
                     score += compareCapnoCap(l_original, l_user)
                     
 
