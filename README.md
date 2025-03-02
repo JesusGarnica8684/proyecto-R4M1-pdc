@@ -10,6 +10,7 @@ Se desarrolló el codigo del jeugo con una estructura de funciones especificas, 
 
 ### Funciones de utilidades 
 - Cargando (text: str):
+
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
 ```python
 def cargando(text: str):
