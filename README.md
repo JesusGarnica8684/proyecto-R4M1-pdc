@@ -5,6 +5,11 @@
 ## Introduccion 
 El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng**, un juego el cual consiste en la generacion y adivinanza de una serie de caracteres aleatorios. El objetivo es que el usuario descubra la secuencia ocualta mediante intentos sucesivos y un sistema de puntuacion.
 ***
+## Cómo se abordó el problema
+Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
+### **1. configuración del juego** 
+* configuration_game
+Antes de iniciar el juego el usuario debe configurar ciertas reglas, para esto, esta funcion solicita los parametros para la partida, como son: 
 ## Diagramas de flujo preliminares:
 # Diagrama general:
 ```mermaid 
