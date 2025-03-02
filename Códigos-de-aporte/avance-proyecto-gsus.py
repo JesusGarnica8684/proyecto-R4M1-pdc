@@ -8,25 +8,23 @@ def compareLengths (listR, listU : list) -> int:
     if len(listR) == len(listU):
         score = 0
         print("LGFG!!! Son del mismo largo (づ ◕‿◕ )づ")
-    elif len(listR) >= len(listU):
+    elif len(listR) > len(listU):
         score = -1
         print("Tch!!! la secuencia es mas larga de lo que ingresaste")
         print("¿No recuerdas como configuraste la partida? (乛-乛)")
-        print("Menos (1) punto, por atembao") 
+        print("(-1) punto, por atembao") 
     else: 
         score = -1
         print("Tch!!! la secuencia es mas corta de lo que ingresaste")
         print("¿No recuerdas como configuraste la partida? (乛-乛)")
-        print("Menos (1) punto, por atembao") 
+        print("(-1) punto, por atembao") 
     return score
         
 #Def comparar mayusculas minúsculas de las listas
-def compareCapnoCap (strR: str, strU: str, listR: list, listU: list) -> int:
+def compareCapnoCap (strU: str, listR: list) -> int:
     score : int = 0
-    capU: list = strU.isalpha(strU.isupper())
-    noCapU: list = strU.isalpha(strU.islower())
     for i in listR:
-        if i in capU: 
+        if i in strU: 
             if i in noCapU:
                 score += 2
                 print (f"Oh! parece que {listR[i]} si se encuentra en la lista tanto en mayuscula como minuscula")
@@ -37,7 +35,7 @@ def compareCapnoCap (strR: str, strU: str, listR: list, listU: list) -> int:
                 score += 1
                 print (f"Oh! parece que {listR[i]} si se encuentra en la lista en mayuscula pero no en minuscula")
                 print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
-                print ("Mas (1) punto")
+                print ("(+1) punto")
         elif i not in capU: 
             if i in noCapU:
                 score += 1
@@ -146,7 +144,22 @@ if __name__ == "__main__":
     l_original = strToList(org_chain)
     user_chain = input("Ingresa tu secuencia de inicio: ")
     l_user = strToList(user_chain)
+    score : int = compareLengths(l_original, l_user)
     
-    if compareLengths(l_original, l_user) == 0:
-        print ("INICIA PARTIDA ")
+    if score == -1:
+        print ("Revisa bien cuantos caracteres estas jugando con:")
+        print(f"\n{start} \n¿Listo?")
+        user_chain = input("Ingresa la secuencia de inicio de nuevo, esta vez hazlo bien. (乛-乛)")
+        l_user = strToList(user_chain)
+        score : int = -1
+    elif score == -1:
+        print ("GAME OVER, POR FEA")
+    elif score == 0:
+        print ("INICIA PARTIDA （*＾ワ＾*）")
+        score += compareCapnoCap(user_chain, l_original)
+
+
+
+        
+
 
