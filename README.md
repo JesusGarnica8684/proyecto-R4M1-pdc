@@ -9,7 +9,7 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
 
 ### Funciones de utilidades 
-- Cargando (text: str):
+- cargando (text: str):
 
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
 ```python
@@ -17,6 +17,85 @@ def cargando(text: str):
     for i in text: 
         print(i, end="") 
         time.sleep(0.2) 
+```
+- strToList(secuencia: str) -> list
+
+Convierte un string en una lista de caracteres para facilitar el analisis de datos. 
+```python
+def strToList (secuencia : str) -> list:
+    return list(secuencia) 
+```
+### Funciones de validación y comparación 
+- compareLengths(listR: list, listU: list) -> int
+
+Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden penaliza al usuario.
+```python
+def compareLengths (listR, listU : list) -> int:
+    score : int = 0
+    if len(listR) == len(listU):
+        score = 0
+        print("LGFG!!! Son del mismo largo (づ ◕‿◕ )づ")
+    elif len(listR) > len(listU):
+        score = -1
+        print("Tch!!! la secuencia es mas larga de lo que ingresaste")
+        time.sleep(2)
+        print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        time.sleep(2)
+        cargando("(-1) punto, por atembao") 
+    else: 
+        score = -1
+        print("Tch!!! la secuencia es mas corta de lo que ingresaste")
+        time.sleep(2)
+        print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        time.sleep(2)
+        cargando("(-1) punto, por atembao") 
+    return score
+```
+- compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]
+
+Esta funcion identifica los caracteres con capitalizacion correcta en la respuesta del usuario en comparacion con la secuencia oculta y otorga los respectivos puntos. 
+
+```python
+def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
+    score : int = 0
+    capU : list = []
+    noCapU : list = []
+    flagT : tuple = []
+    for i in listU:
+        if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
+            capU.append(i)
+        elif i.isalpha() and i.islower():  # Verificar si el carácter es alfabético y minúscula
+            noCapU.append(i) 
+    for i in listR:
+        if i in capU and i in noCapU:
+            score += 2
+            flagT.append(True) 
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
+            print ("Un piko por inteliegente ( ˘ ³˘)♥")
+            print ("(+2) puntos")
+        elif i in capU and i not in noCapU:
+            score += 1
+            flagT.append(False) 
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
+        elif i not in capU and i in noCapU:
+            score += 1
+            flagT.append(False) 
+            time.sleep(2)
+            print (f"Oh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
+            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print ("(+1) punto")
+        else:  
+            time.sleep(2)
+            cargando ("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+    if all.flagT() == True:
+        flag = True 
+    else:
+        flag = False 
+    return score, flag
 ```
 ***
 ## Diagramas de flujo preliminares:
