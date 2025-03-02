@@ -4,7 +4,6 @@ from tabulate import tabulate
 import time 
 
 #Def print de carga, for a dramatic flare 
-
 def cargando(text: str):
     for i in text: # recorre cada caracter del string
         print(i, end="") # va imprimiendolo uno por uno conforme avanza
@@ -191,7 +190,7 @@ def combinacion_aleatorea(configuration:dict) -> list:
     return chain_list
 
 # Crea una lista con los caracteres que coinciden en posicion
-def compare_index(user_chain:str, org_chain:str, score:int) -> list:
+def compare_index(user_chain:str, org_chain:str, score:int) -> int:
     both_index = []
     bot = zip(org_chain, user_chain)
     both = list(bot)
@@ -214,11 +213,10 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> list:
             print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
             print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
             print (f"+ ({len(both_index)}) puntos")
-
     return score
 
 # Crea una lista de los caracteres que coinciden en ambas listas
-def compare_exist(user_chain:str, org_chain:str, score:int) -> list:
+def compare_exist(user_chain:str, org_chain:str, score:int) -> int:
     in_both = []
     for char in user_chain:
         if char in org_chain:
@@ -239,8 +237,7 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> list:
             print (f"Parece que {str(in_both)} estan en la cadena!!")
             print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
             print (f"+ ({len(in_both)}) puntos")
-
-    return in_both
+    return score
 
 if __name__ == "__main__":
     configuration = {}
