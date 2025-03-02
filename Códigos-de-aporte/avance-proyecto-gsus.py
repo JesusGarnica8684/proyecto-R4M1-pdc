@@ -37,10 +37,11 @@ def compareLengths (listR, listU : list) -> int:
     return score
         
 #Def comparar mayusculas minúsculas de las listas
-def compareCapnoCap (listR: list, listU : list) -> int:
+def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
     score : int = 0
     capU : list = []
     noCapU : list = []
+    flagT : tuple = []
     for i in listU:
         if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
             capU.append(i)
@@ -49,18 +50,21 @@ def compareCapnoCap (listR: list, listU : list) -> int:
     for i in listR:
         if i in capU and i in noCapU:
             score += 2
+            flagT.append(True) 
             time.sleep(2)
             print (f"Oh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
             print ("Un piko por inteliegente ( ˘ ³˘)♥")
             print ("(+2) puntos")
         elif i in capU and i not in noCapU:
             score += 1
+            flagT.append(False) 
             time.sleep(2)
             print (f"Oh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
             print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
             print ("(+1) punto")
         elif i not in capU and i in noCapU:
             score += 1
+            flagT.append(False) 
             time.sleep(2)
             print (f"Oh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
             print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
@@ -68,7 +72,11 @@ def compareCapnoCap (listR: list, listU : list) -> int:
         else:  
             time.sleep(2)
             cargando ("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
-    return score  
+    if all.flagT() == True:
+        flag = True 
+    else:
+        flag = False 
+    return score, flag  
 
 def validar_entrada(usuario_input:str, configuration:dict) -> bool:
     #Verifica si la entrada del usuario contiene solo caracteres permitidos.
@@ -203,6 +211,7 @@ if __name__ == "__main__":
     l_user = strToList(user_chain)
     score : int = compareLengths(l_original, l_user)
     flag : bool = validar_entrada(user_chain, configuration)
+    win : bool = False
     
     if score == -1 and flag == False:
         print ("Revisa bien la configuracion con la que estas jugando:")
@@ -221,13 +230,18 @@ if __name__ == "__main__":
         if configuration.get("Lifes") == "infinitos":
             match configuration.values():
                 case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                    score += compareCapnoCap(l_original, l_user)
+                    while win == False:
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
         if configuration.get("Lifes") in {3, 5, 10}:
             match configuration.values():
                 case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
                     lifes = configuration.get("Lifes")
                     for _ in range(lifes):
-                        score += compareCapnoCap(l_original, l_user)
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
                     
 
 
