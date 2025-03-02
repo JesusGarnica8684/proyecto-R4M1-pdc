@@ -4,37 +4,56 @@ from tabulate import tabulate
 
 def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
     # Caracteres
-    data_value = input("    1- Tipo de caracteres (letras, numeros, ambos): ")
-    configuration["Data"] = data_value
+    while True:
+        data_value = input("    1- Tipo de caracteres (letras, numeros, ambos): ")
+        if data_value in {"letras", "numeros", "ambos"}:
+            configuration["Data"] = data_value
+            break
+        else:
+            print("No esta dentro de las opciones (⩺_⩹)")
 
     # Capitalización
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
-        capital_value = input("    2- Capitalizacion de letras (mayusculas, minusculas, ambas): ")
-        configuration["Capital"] = capital_value
+        while True:
+            capital_value = input("    2- Capitalizacion de letras (mayusculas, minusculas, ambas): ")
+            if capital_value in {"mayusculas", "minusculas", "ambas"}:
+                configuration["Capital"] = capital_value
+                break
+            else:
+                print("No esta dentro de las opciones (⩺_⩹)")
     else:
         pass
     
     # Repetición
-    repetition_value = input("    3- Repetición de caracteres (si, no): ")
-    configuration["Repetition"] = repetition_value
+    while True:
+        repetition_value = input("    3- Repetición de caracteres (si, no): ")
+        if repetition_value == "si" or repetition_value == "no":
+            configuration["Repetition"] = repetition_value
+            break
+        else:
+            print("ಠ_ʖಠ ... si o no")
     
-    # Verificación de cantidad de intentos
+    # Cantidad de intentos
     while True:
         amount_value = int(input("    4- Cantidad de caracteres (3-10): "))
         if amount_value >= 3 and amount_value <= 10:
             configuration["Amount"] = amount_value
             break
         else:
-            print("Te dije que 3 a 10!!!")
             print("Puedes usar 3, 4, 5, 6 ... ಠ_ʖಠ ... 7, 8, 9, 10")
 
     # Vidas (intentos para adivinar)
-    lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
-    if lifes_value == "infinitos": 
-        lifes_value = float('inf')
-    else: 
-        lifes_value = int(lifes_value)
-    configuration["Lifes"] = lifes_value
+    while True:
+        lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
+        if lifes_value in {3, 5, 10, "infinitos"}:
+            if lifes_value == "infinitos": 
+                lifes_value = float('inf')
+            else: 
+                lifes_value = int(lifes_value)
+            configuration["Lifes"] = lifes_value
+            break
+        else:
+            print("Opcion NO disponible -(`෴´)- ")
 
     # Imprimir el diccionario en forma de tabla
     configuration_tab = tabulate(configuration.items(), tablefmt= "grid")
