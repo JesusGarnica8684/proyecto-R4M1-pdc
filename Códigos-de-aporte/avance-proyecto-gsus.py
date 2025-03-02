@@ -5,13 +5,20 @@ def strToList (secuencia : str) -> list:
 def compareLengths (listR, listU : list) -> int:
     score : int = 0
     if len(listR) == len(listU):
-        score = 1
+        score = 0
         print("LGFG!!! Son del mismo largo (づ ◕‿◕ )づ")
     elif len(listR) >= len(listU):
-        score = 0
+        score = -1
         print("Tch!!! la secuencia es mas larga de lo que ingresaste")
         print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        print("Menos (1) punto, por atembao") 
+    else: 
+        score = -1
+        print("Tch!!! la secuencia es mas corta de lo que ingresaste")
+        print("¿No recuerdas como configuraste la partida? (乛-乛)")
+        print("Menos (1) punto, por atembao") 
     return score
         
 #Def comparar mayusculas minúsculas de las listas
-def compareCapnoCap (list1, list2 : list) -> int:
+def compareCapnoCap (str1: str, str2: str, list1: list, list2: list) -> int:
+    str1 
