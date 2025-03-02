@@ -2,7 +2,8 @@ import random
 import string
 from tabulate import tabulate
 
-def configuration_game(configuration:dict): # Pregunta al jugador como quiere jugar
+# Pregunta al jugador como quiere jugar
+def configuration_game(configuration:dict) -> dict: 
     # Caracteres
     while True:
         data_value = input("    1- Tipo de caracteres (letras, numeros, ambos): ")
@@ -60,7 +61,8 @@ def configuration_game(configuration:dict): # Pregunta al jugador como quiere ju
 
     return configuration_tab
 
-def combinacion_aleatorea(configuration:dict):
+# Genera la cadena por adivinar
+def combinacion_aleatorea(configuration:dict) -> list: 
     # Lista para guardar los caracteres con los que se genera la cadena
     options = [] 
     mayus = string.ascii_uppercase # Mayusculas
@@ -96,8 +98,41 @@ def combinacion_aleatorea(configuration:dict):
 
     return chain_list
 
+# Crea una lista con los caracteres que coinciden en posicion
+def compare_index(user_chain:str, org_chain:str, score:int) -> list:
+    both_index = []
+    for char in user_chain:
+        index = enumerate(org_chain) 
+        if char in org_chain:
+            for i, c in index:
+                if c == char:
+                    both_index.append(i)
+    for _ in both_index:
+        score += 1
+    return both_index
+
+# Crea una lista de los caracteres que coinciden en ambas listas
+def compare_exist(user_chain:str, org_chain:str, score:int) -> list:
+    in_both = []
+    for char in user_chain:
+        if char in org_chain:
+            in_both.append(char)
+
+    if not in_both: # Si la lista esta vacia
+        print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+    elif len(in_both) >= 3:
+        print (f"Parece que {str(in_both)} estan en la posicion correcta!!")
+        print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+        print ("+ (2) punto")
+    elif len(in_both) == 1:
+        print (f"Parece que {str(in_both)} esta en la posicion correcta!!")
+        print ("+ (1) punto")
+    
+    return in_both
+
 if __name__ == "__main__":
     configuration = {}
+    score: int = 0
 
     print("\n...Bienvenido a...")
     print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
@@ -112,3 +147,5 @@ if __name__ == "__main__":
 
     hiden_chain = "*" * len(org_chain)
     print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
+
+    user_chain = input("Ingresa tu secuencia de inicio: ")
