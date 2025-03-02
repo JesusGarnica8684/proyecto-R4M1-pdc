@@ -198,7 +198,7 @@ def combinacion_aleatorea(configuration:dict) -> list:
     return chain_list
 
 # Crea una lista con los caracteres que coinciden en posicion
-def compare_index(user_chain:str, org_chain:str, score:int) -> int:
+def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]:
     both_index = []
     bot = zip(org_chain, user_chain)
     both = list(bot)
@@ -221,10 +221,10 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> int:
             print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
             print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
             print (f"+ ({len(both_index)}) puntos")
-    return score
+    return score, flag
 
 # Crea una lista de los caracteres que coinciden en ambas listas
-def compare_exist(user_chain:str, org_chain:str, score:int) -> int:
+def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
     in_both = []
     for char in user_chain:
         if char in org_chain:
@@ -245,7 +245,7 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> int:
             print (f"Parece que {str(in_both)} estan en la cadena!!")
             print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
             print (f"+ ({len(in_both)}) puntos")
-    return score
+    return score, flag 
 
 if __name__ == "__main__":
     configuration = {}
