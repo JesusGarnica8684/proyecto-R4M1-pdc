@@ -7,10 +7,27 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 ***
 ## Cómo se abordó el problema
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
-### **1. configuración del juego** 
+
+### **1. Configuración del juego** 
 * configuration_game
   
 Antes de iniciar el juego el usuario debe configurar ciertas reglas, para esto, esta funcion solicita los parametros para la partida, como son: Tipo de caracteres, capitalizacion, cantidad de caracteres, si hay repeticion, y la cantidad de vidas. y devuelve un diccionario con sus valores asignados.
+
+### **2. Generación de la secuencia oculta** 
+* combinacion_aleatorea
+  
+Esta funcion genera una secuencia aleatoria usando solo los caracteres permitidos por la configuracion definida por el usuario.
+
+### **3. conversión y validacion de datos** 
+* strToList
+  
+Convierte la cadena dada por el usuario en una lista de caracteres para facilitar su verificación.
+
+* validar_entrada
+  
+Esta función verifica que la entrada del usuario solo contenga caracteres permitidos. 
+
+***
 ## Diagramas de flujo preliminares:
 # Diagrama general:
 ```mermaid 
