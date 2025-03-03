@@ -19,7 +19,7 @@ def cargando(text: str):
         time.sleep(0.2) 
 ```
 ```mermaid 
-graph TD;
+flowchart TD;
     A[Inicio] --> B{¿Quedan caracteres?};
     B -->|Sí| C[Imprimir carácter con retraso];
     C --> B;
@@ -31,6 +31,12 @@ Convierte un string en una lista de caracteres para facilitar el analisis de dat
 ```python
 def strToList (secuencia : str) -> list:
     return list(secuencia) 
+```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Convertir string en lista de caracteres];
+    B --> C[Retornar lista];
+    C --> D[Fin];
 ```
 ### Funciones de validación y comparación 
 ### -compareLengths(listR: list, listU: list) -> int
@@ -57,6 +63,16 @@ def compareLengths (listR, listU : list) -> int:
         time.sleep(2)
         cargando("(-1) punto, por atembao") 
     return score
+```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Comparar longitudes];
+    B --> C{¿Son iguales?};
+    C -->|Sí| D[Imprimir mensaje de éxito];
+    D --> E[Retornar 0];
+    C -->|No| F[Penalizar y mostrar mensaje];
+    F --> G[Retornar -1];
+    E & G --> H[Fin];
 ```
 ### -compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]
 
@@ -104,6 +120,19 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
         flag = False 
     return score, flag
 ```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B{¿Quedan caracteres?};
+    B -->|Sí| C[Comparar mayúsculas y minúsculas];
+    C --> D{¿Coinciden exactamente?};
+    D -->|Sí| E[Añadir 2 puntos, marcar True];
+    D -->|No| F{¿Coinciden sin importar mayúsculas?};
+    F -->|Sí| G[Añadir 1 punto, marcar False];
+    F -->|No| H[Imprimir mensaje neutro];
+    E & G & H --> B;
+    B -->|No| I[Retornar puntuación y flag];
+    I --> J[Fin];
+```
 ### -compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
 
 Esta funcion identifica los caracteres que coinciden en posicion en ambas listas. 
@@ -134,6 +163,24 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]
             print (f"+ ({len(both_index)}) puntos")
     return score, flag
 ```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Inicializar lista de coincidencias];
+    B --> C[Comparar caracteres de user_chain y org_chain];
+    C --> D{¿Coinciden en posición?};
+    D -->|Sí| E[Añadir carácter a lista];
+    D -->|No| F[Continuar con siguiente carácter];
+    E & F --> C;
+    C --> G{¿Lista vacía?};
+    G -->|Sí| H[Imprimir mensaje de fallo];
+    G -->|No| I{¿Un solo acierto?};
+    I -->|Sí| J[Incrementar score en 1];
+    I -->|No| K[Añadir puntos según cantidad de aciertos];
+    J & K --> L[Mostrar mensaje de puntos];
+    L --> M[Retornar score y flag];
+    M --> N[Fin];
+
+```
 ### -compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
 
 Evalúa qué caracteres de la entrada del usuario están presentes en la cadena correcta, sin importar la posición. 
@@ -162,6 +209,23 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
             print (f"+ ({len(in_both)}) puntos")
     return score, flag 
 ```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Inicializar lista de coincidencias];
+    B --> C[Recorrer caracteres de user_chain];
+    C --> D{¿Está en org_chain?};
+    D -->|Sí| E[Añadir carácter a lista];
+    D -->|No| F[Continuar con siguiente carácter];
+    E & F --> C;
+    C --> G{¿Lista vacía?};
+    G -->|Sí| H[Imprimir mensaje de fallo];
+    G -->|No| I{¿Un solo acierto?};
+    I -->|Sí| J[Incrementar score en 1];
+    I -->|No| K[Añadir puntos según cantidad de aciertos];
+    J & K --> L[Mostrar mensaje de puntos];
+    L --> M[Retornar score y flag];
+    M --> N[Fin];
+```
 ### Funciones del juego 
 ### -history(name: str, score: int) -> dict
 
@@ -183,6 +247,15 @@ Registra el nombre del jugador y su puntaje en un diccionario.
 
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
     return user_tries_tab
+```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Crear entrada de usuario];
+    B --> C[Añadir a lista de partidas];
+    C --> D[Ordenar lista de intentos];
+    D --> E[Asignar ranking];
+    E --> F[Retornar tabla formateada];
+    F --> G[Fin];
 ```
 ### game_start(configuration: dict)
 
@@ -215,6 +288,17 @@ Maneja el flujo principal del juego, asegurando que se sigan las reglas configur
         if win == True:
             history(name, score)
 ```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B{¿Vidas infinitas?};
+    B -->|Sí| C[Seleccionar reglas adecuadas];
+    B -->|No| D[Configurar intentos limitados];
+    C & D --> E{¿Juego terminado?};
+    E -->|No| F[Llamar funciones de validación y puntuación];
+    F --> E;
+    E -->|Sí| G[Mostrar resultado y terminar];
+    G --> H[Fin];
+```
 ### -validar_entrada(usuario_input: str, configuration: dict) -> bool
 
 Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
@@ -240,6 +324,33 @@ Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres
         validacion : bool = True
         cargando ("♥°˖✧°˖✧°˖✧°˖✧°˖✧◝(⁰▿⁰)◜✧˖°✧˖°✧˖°✧˖°♥")
     return validacion 
+```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Inicializar allowed_characters vacío];
+    
+    B --> C{¿Data permite letras?};
+    C -->|Sí| D{¿Capital en mayúsculas?};
+    D -->|Sí| E[Añadir mayúsculas a allowed_characters];
+    D -->|No| F{¿Capital en minúsculas?};
+    F -->|Sí| G[Añadir minúsculas a allowed_characters];
+    F -->|No| H{¿Capital en ambas?};
+    H -->|Sí| I[Añadir mayúsculas y minúsculas];
+
+    C -->|No| J{¿Data permite números?};
+    J -->|Sí| K[Añadir dígitos a allowed_characters];
+
+    E & G & I & K --> L[Verificar si usuario_input contiene solo caracteres permitidos];
+    
+    L --> M{¿Todos los caracteres son válidos?};
+    M -->|No| N[Imprimir mensaje de error y animación de carga];
+    N --> O[Retornar False];
+    
+    M -->|Sí| P[Imprimir mensaje de éxito y animación de carga];
+    P --> Q[Retornar True];
+
+    O & Q --> R[Fin];
+
 ```
 ### -configuration_game(configuration: dict) -> dict
 
@@ -297,6 +408,40 @@ def configuration_game(configuration:dict) -> dict:
 
     return configuration_tab
 ```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Solicitar Tipo de caracteres];
+    B --> C{¿Es válido?};
+    C -->|No| B;
+    C -->|Sí| D[Guardar elección en configuración];
+
+    D --> E{¿Se eligieron letras o ambos?};
+    E -->|Sí| F[Solicitar Capitalización];
+    F --> G{¿Es válida?};
+    G -->|No| F;
+    G -->|Sí| H[Guardar elección en configuración];
+
+    E -->|No| I[Omitir capitalización];
+
+    H & I --> J[Solicitar Repetición de caracteres];
+    J --> K{¿Es válida?};
+    K -->|No| J;
+    K -->|Sí| L[Guardar elección en configuración];
+
+    L --> M[Solicitar Cantidad de caracteres];
+    M --> N{¿Está en el rango 3-10?};
+    N -->|No| M;
+    N -->|Sí| O[Guardar elección en configuración];
+
+    O --> P[Solicitar Intentos];
+    P --> Q{¿Es válido?};
+    Q -->|No| P;
+    Q -->|Sí| R[Guardar elección en configuración];
+
+    R --> S[Mostrar configuración con tabulate];
+    S --> T[Retornar configuración];
+    T --> U[Fin];
+```
 ### -combinacion_aleatorea(configuration: dict) -> list
 
 Genera la cadena aleatoria basada en las configuraciones.
@@ -334,6 +479,37 @@ def combinacion_aleatorea(configuration:dict) -> list:
         chain_list.append(elem)
 
     return chain_list
+```
+```mermaid 
+flowchart TD
+    A["Inicio"] --> B["Inicializar lista de opciones"];
+    
+    B --> C{"¿Data es 'letras' o 'ambos'?"};
+    C -->|Sí| D["Verificar capitalización"];
+    
+    D --> E{"¿Es 'mayúsculas'?"};
+    E -->|Sí| F["Añadir mayúsculas a opciones"];
+    E -->|No| G{"¿Es 'minúsculas'?"};
+    G -->|Sí| H["Añadir minúsculas a opciones"];
+    G -->|No| I["Añadir ambas a opciones"];
+    
+    C -->|No| J["Omitir letras"];
+    
+    F & H & I & J --> K{"¿Data es 'números' o 'ambos'?"};
+    K -->|Sí| L["Añadir números a opciones"];
+    K -->|No| M["Omitir números"];
+
+    L & M --> N["Unir opciones en string"];
+    N --> O["Obtener longitud de cadena"];
+
+    O --> P{"¿Repetición permitida?"};
+    P -->|No| Q["Usar random.sample para cadena única"];
+    P -->|Sí| R["Usar random.choices para cadena con repetición"];
+
+    Q & R --> S["Convertir cadena en lista"];
+    S --> T["Retornar lista"];
+    T --> U["Fin"];
+
 ```
 ***
 ## Diagramas de flujo preliminares:
