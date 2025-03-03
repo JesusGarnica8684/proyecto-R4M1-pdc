@@ -15,6 +15,8 @@ def history(user_tries:list, name:str, score:int) -> dict:
         "Puntaje" : score
     }
     user_tries.append(partida)
+    
+    user_tries.sort(key=lambda x: x["Puntaje"], reverse=True)
 
     for rank, dic in enumerate(user_tries, start= 1):
         dic["rank"] = rank
