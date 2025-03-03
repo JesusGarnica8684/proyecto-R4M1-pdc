@@ -118,7 +118,7 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
             in_both.append(char)
         else:
             pass
-
+        
     if len(in_both) == len(org_chain):
         flagT.append(True) 
     else:
