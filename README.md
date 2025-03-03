@@ -18,6 +18,13 @@ def cargando(text: str):
         print(i, end="") 
         time.sleep(0.2) 
 ```
+```mermaid 
+graph TD;
+    A[Inicio] --> B{¿Quedan caracteres?};
+    B -->|Sí| C[Imprimir carácter con retraso];
+    C --> B;
+    B -->|No| D[Fin];
+```
 ### -strToList(secuencia: str) -> list
 
 Convierte un string en una lista de caracteres para facilitar el analisis de datos. 
