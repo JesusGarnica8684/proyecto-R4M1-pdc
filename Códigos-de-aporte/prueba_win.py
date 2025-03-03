@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
         if q_dead == "si":
             dead = False
-            dos = history(name, score)
+            dos = history(user_tries, name, score)
             print(dos)
         elif q_dead == "no":
             dead = True
