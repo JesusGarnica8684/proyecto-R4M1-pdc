@@ -44,5 +44,5 @@ if __name__ == "__main__":
         elif q_dead == "no":
             dead = True
             break
-    dos = history(name, score)
+    dos = history(user_tries, name, score)
     print(dos)
