@@ -91,14 +91,17 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
         flagT.append(False) 
         match len(both_index):
             case 0:
+                time.sleep(2)
                 print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
             case 1:
                 score += 1
+                time.sleep(2)
                 print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
                 print ("+ (1) punto")
             case _:
                 for _ in both_index:
                     score += 1
+                time.sleep(2)
                 print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
                 print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
                 print (f"+ ({len(both_index)}) puntos")
@@ -125,16 +128,19 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
         flagT.append(False) 
         match len(in_both):
             case 0:
-                print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+                time.sleep(2)
+                print("No le atinaste ni a una (ㆆ_ㆆ)")
             case 1:
                 score += 1
+                time.sleep(2)
                 print (f"Parece que {str(in_both)} esta en la cadena!!")
                 print ("+ (1) punto")
             case _:
                 for _ in in_both:
                     score += 1
+                time.sleep(2)
+                print("( ͠❛ ₒ͠❛ ) ¿¿¿¿Te llamas Akinator????")
                 print (f"Parece que {str(in_both)} estan en la cadena!!")
-                print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
                 print (f"+ ({len(in_both)}) puntos")
 
     if all.flagT() == True:

@@ -36,19 +36,20 @@ def validar_entrada(usuario_input:str, configuration:dict) -> bool:
         cargando ("♥°˖✧°˖✧°˖✧°˖✧°˖✧◝(⁰▿⁰)◜✧˖°✧˖°✧˖°✧˖°♥")
     return validacion 
 
-def history(name:str, score:int) -> dict:
-    user_tries = []
+# Leaderboard
+def history(user_tries:list, name:str, score:int) -> dict:
+    # Crea un diccionario por cada partida jugada, guarda los diccionarios en una lista
     partida = {
         "Nombre" : name,
         "Puntaje" : score
     }
     user_tries.append(partida)
-    sorted(user_tries, reversed= True)
+    
+    # Ordenar la lista de intentos por puntaje de mayor a menor
+    user_tries.sort(key=lambda x: x["Puntaje"], reverse=True)
 
-    rank : int = 1
-    for dic in user_tries:
+    for rank, dic in enumerate(user_tries, start= 1):
         dic["rank"] = rank
-        rank += 1
 
     # Imprimir el diccionario en forma de tabla
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
