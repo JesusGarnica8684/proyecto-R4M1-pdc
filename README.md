@@ -8,7 +8,7 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 ## Cómo se abordó el problema
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
 
-## Funciones de utilidades 
+### Funciones de utilidades 
 ### -cargando (text: str):
 
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
@@ -25,7 +25,7 @@ Convierte un string en una lista de caracteres para facilitar el analisis de dat
 def strToList (secuencia : str) -> list:
     return list(secuencia) 
 ```
-## Funciones de validación y comparación 
+### Funciones de validación y comparación 
 ### -compareLengths(listR: list, listU: list) -> int
 
 Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden penaliza al usuario.
@@ -155,7 +155,7 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
             print (f"+ ({len(in_both)}) puntos")
     return score, flag 
 ```
-## Funciones del juego 
+### Funciones del juego 
 ### -validar_entrada(usuario_input: str, configuration: dict) -> bool
 
 Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
