@@ -10,6 +10,3 @@ for org, user in both:
     else:
         print("Diferentes", org, user)
 print(lista)
-
-
-    

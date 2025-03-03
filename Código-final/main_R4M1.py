@@ -54,6 +54,7 @@ if __name__ == "__main__":
             print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
             
         if configuration.get("Lifes") == "infinitos":
+            again : int = 0
             match configuration.values():
                 case {"Data": "letras", "Capital": "ambas"}:
                     while not win:
@@ -70,7 +71,16 @@ if __name__ == "__main__":
                         flagIndex = tuplaIndex[1]
 
                         if flagCap and flagExist and flagIndex:
-                            win = True  
+                            win = True
+                        else:
+                            while True:
+                                for i in range(10):                          
+                                    quest = input("¿Quieres seguir jugando?")
+                                    if quest == "no":
+                                        break
+                                    elif quest == "si":
+                                        win = False
+                                again += 1
 
                 case {"Data": "ambos", "Capital": "ambas"}:
                     while not win:
@@ -291,22 +301,16 @@ if __name__ == "__main__":
                                 print("GAME OVER")
                                 break 
 
-
-
-                        
-
 #-------------------------------------------------------------------------
-            elif win == True:
-                functionality_defs.cargando("GANASTEEEEEEEEEEEEEEEEE")
-            elif win == False:
-                functionality_defs.cargando("PERDISTEEEEEEEEEEEEEEEEE")
+        elif win == True:
+            functionality_defs.cargando("GANASTEEEEEEEEEEEEEEEEE")
 
-            # Al terminar la partida, pregunta al usuario si quiero jugar otravez
-            dead = input("¿Quieres jugar otra vez?: ")
-            if dead == "si":
-                functionality_defs.history("\n", name, score) # Mostrar leaderboard
-            elif dead == "no":
-                break
+        # Al terminar la partida, pregunta al usuario si quiero jugar otravez
+        dead = input("¿Quieres jugar otra vez?: ")
+        if dead == "si":
+            functionality_defs.history("\n", name, score) # Mostrar leaderboard
+        elif dead == "no":
+            break
     functionality_defs.history("\n", name, score)
     print("""┏━━━━━━━━━━━━━━━━━━━━━━━┓\n♡   Gracias por jugar   ♡\n┗━━━━━━━━━━━━━━━━━━━━━━━┛""")
     #-------------------------------------------------------------------------
