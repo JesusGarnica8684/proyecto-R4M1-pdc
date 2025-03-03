@@ -25,7 +25,7 @@ flowchart TD;
     C --> B;
     B -->|No| D[Fin];
 ```
-### -strToList(secuencia: str) -> list
+*-strToList(secuencia: str) -> list*
 
 Convierte un string en una lista de caracteres para facilitar el analisis de datos. 
 ```python
@@ -39,7 +39,7 @@ flowchart TD;
     C --> D[Fin];
 ```
 ### Funciones de validación y comparación 
-### -compareLengths(listR: list, listU: list) -> int
+*-compareLengths(listR: list, listU: list) -> int*
 
 Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden penaliza al usuario.
 ```python
@@ -74,7 +74,7 @@ flowchart TD;
     F --> G[Retornar -1];
     E & G --> H[Fin];
 ```
-### -compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]
+*-compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]*
 
 Esta funcion identifica los caracteres con capitalizacion correcta en la respuesta del usuario en comparacion con la secuencia oculta y otorga los respectivos puntos. 
 
@@ -133,7 +133,7 @@ flowchart TD;
     B -->|No| I[Retornar puntuación y flag];
     I --> J[Fin];
 ```
-### -compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+*-compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]*
 
 Esta funcion identifica los caracteres que coinciden en posicion en ambas listas. 
 
@@ -181,7 +181,7 @@ flowchart TD;
     M --> N[Fin];
 
 ```
-### -compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]
+*-compare_exist(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]*
 
 Evalúa qué caracteres de la entrada del usuario están presentes en la cadena correcta, sin importar la posición. 
 
@@ -227,7 +227,7 @@ flowchart TD;
     M --> N[Fin];
 ```
 ### Funciones del juego 
-### -history(name: str, score: int) -> dict
+*-history(name: str, score: int) -> dict*
 
 Registra el nombre del jugador y su puntaje en un diccionario.
 ```python
@@ -257,7 +257,7 @@ flowchart TD;
     E --> F[Retornar tabla formateada];
     F --> G[Fin];
 ```
-### game_start(configuration: dict)
+*game_start(configuration: dict)*
 
 Maneja el flujo principal del juego, asegurando que se sigan las reglas configuradas.
 ```python
@@ -299,7 +299,7 @@ flowchart TD;
     E -->|Sí| G[Mostrar resultado y terminar];
     G --> H[Fin];
 ```
-### -validar_entrada(usuario_input: str, configuration: dict) -> bool
+*-validar_entrada(usuario_input: str, configuration: dict) -> bool*
 
 Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
 ```python
@@ -352,7 +352,7 @@ flowchart TD;
     O & Q --> R[Fin];
 
 ```
-### -configuration_game(configuration: dict) -> dict
+*-configuration_game(configuration: dict) -> dict*
 
 Pide al usuario definir los parametros con los q va a jugar, parametro como: tipo de caracter, mayusculas / minusculas, repeticion de caracteres, etc.
 ```python
@@ -442,7 +442,7 @@ flowchart TD;
     S --> T[Retornar configuración];
     T --> U[Fin];
 ```
-### -combinacion_aleatorea(configuration: dict) -> list
+*-combinacion_aleatorea(configuration: dict) -> list*
 
 Genera la cadena aleatoria basada en las configuraciones.
 ```python
