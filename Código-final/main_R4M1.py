@@ -13,25 +13,27 @@ if __name__ == "__main__":
         print("\n...Bienvenido a...")
         print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
         name = input("¿Como te llamas?: ")
-        print(f"¿List@ para divertirte {name}? :D")
+        print(f"¿List@ para divertirte {name}? :D") #Guarda el user de la partida 
         print("Te hare 5 preguntas →")
-
-        start = configuration_defs.configuration_game(configuration)
-        print(f"\n{start}")
-
+        #se llama a la configuración del juego que va a crear el diccionario con los datos de la partida
+        start = configuration_defs.configuration_game(configuration) 
+        print(f"\n{start}") #se imprime el start que esta formateado con tabulate y se le muestra al usuario
+        #se crea el string aleatorio segun las configuracions del juego
         org_chain = configuration_defs.combinacion_aleatorea(configuration)
         print(org_chain)
 
-        hiden_chain = "*" * len(org_chain)
+        hiden_chain = "*" * len(org_chain) #se "esconden" los valores de la cadena imprimiendo asteriscos por cada caracter
         print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
 
+        #se utiliza el estring creado por aletaorio, y se vuelve una lista que contiene sus caracteres 
         l_original = functionality_defs.strToList(org_chain)
+        #inicializa la string del user 
         user_chain = input("Ingresa tu secuencia de inicio: ")
-        l_user = functionality_defs.strToList(user_chain)
-        score : int = score_defs.compareLengths(l_original, l_user)
-        penalty : int = 0
-        flag : bool = functionality_defs.validar_entrada(user_chain, configuration)
-        win : bool = False
+        l_user = functionality_defs.strToList(user_chain) # se convierte en lista la string del user 
+        score : int = score_defs.compareLengths(l_original, l_user) # se inicializa el puntaje del juego
+        penalty : int = 0 
+        flag : bool = functionality_defs.validar_entrada(user_chain, configuration) # se iniciliza la flag que permite o no el inicio del juego
+        win : bool = False # se inicializa la bandera bool que contiene si el jugador ha ganado o no
         
         if score == -1 and flag == False:
             penalty = score 
@@ -294,7 +296,7 @@ if __name__ == "__main__":
                         
 
 #-------------------------------------------------------------------------
-    elif win == True:
+            elif win == True:
                 functionality_defs.cargando("GANASTEEEEEEEEEEEEEEEEE")
             elif win == False:
                 functionality_defs.cargando("PERDISTEEEEEEEEEEEEEEEEE")
