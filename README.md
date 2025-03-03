@@ -30,7 +30,7 @@ flowchart TD;
 Convierte un string en una lista de caracteres para facilitar el análisis de datos.
 ```python
 def strToList (secuencia : str) -> list:
-    return list(secuencia) 
+    return list(secuencia)
 ```
 ```mermaid 
 flowchart TD;
@@ -45,6 +45,7 @@ Compara la longitud de la respuesta del usuario con respecto a la lista generada
 ```python
 def compareLengths (listR, listU : list) -> int:
     score : int = 0
+    
     if len(listR) == len(listU):
         score = 0
         print("LGFG!!! Son del mismo largo (づ ◕‿◕ )づ")
@@ -54,14 +55,14 @@ def compareLengths (listR, listU : list) -> int:
         time.sleep(2)
         print("¿No recuerdas como configuraste la partida? (乛-乛)")
         time.sleep(2)
-        cargando("(-1) punto, por atembao") 
+        functionality_defs.cargando("(-1) punto, por atembao") 
     else: 
         score = -1
         print("Tch!!! la secuencia es mas corta de lo que ingresaste")
         time.sleep(2)
         print("¿No recuerdas como configuraste la partida? (乛-乛)")
         time.sleep(2)
-        cargando("(-1) punto, por atembao") 
+        functionality_defs.cargando("(-1) punto, por atembao") 
     return score
 ```
 ```mermaid 
@@ -83,12 +84,14 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
     score : int = 0
     capU : list = []
     noCapU : list = []
-    flagT : tuple = []
+    flagT : tuple = ()
+
     for i in listU:
-        if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
+        if i.isalpha() and i.isupper():
             capU.append(i)
-        elif i.isalpha() and i.islower():  # Verificar si el carácter es alfabético y minúscula
+        elif i.isalpha() and i.islower():
             noCapU.append(i) 
+
     for i in listR:
         if i in capU and i in noCapU:
             score += 2
@@ -113,12 +116,13 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
             print ("(+1) punto")
         else:  
             time.sleep(2)
-            cargando ("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+            functionality_defs.cargando ("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+
     if all.flagT() == True:
         flag = True 
     else:
         flag = False 
-    return score, flag
+    return score, flag  
 ```
 ```mermaid 
 flowchart TD;
@@ -138,29 +142,43 @@ flowchart TD;
 Esta función identifica los caracteres que coinciden en posición en ambas listas. 
 
 ```python
-def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]:
+def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
+    flagT : tuple = ()
     both_index = []
     bot = zip(org_chain, user_chain)
     both = list(bot)
+
     for org, user in both:
         if org == user:
             both_index.append(user)
         else:
-            pass 
+            pass
 
-    match len(both_index):
-        case 0:
-            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
-        case 1:
-            score += 1
-            print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
-            print ("+ (1) punto")
-        case _:
-            for _ in both_index:
+    if len(both_index) == len(org_chain):
+        flagT.append(True) 
+    else:
+        flagT.append(False) 
+        match len(both_index):
+            case 0:
+                time.sleep(2)
+                print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
+            case 1:
                 score += 1
-            print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
-            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
-            print (f"+ ({len(both_index)}) puntos")
+                time.sleep(2)
+                print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
+                print ("+ (1) punto")
+            case _:
+                for _ in both_index:
+                    score += 1
+                time.sleep(2)
+                print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
+                print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+                print (f"+ ({len(both_index)}) puntos")
+
+    if all.flagT() == True:
+        flag = True 
+    else:
+        flag = False 
     return score, flag
 ```
 ```mermaid 
@@ -187,26 +205,39 @@ Evalúa qué caracteres de la entrada del usuario están presentes en la cadena 
 
 ```python
 def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
+    flagT : tuple = ()
     in_both = []
     for char in user_chain:
         if char in org_chain:
             in_both.append(char)
         else:
             pass
-
-    match len(in_both):
-        case 0:
-            print("¿Que paso bb? ninguna esta en la posicion correcta ╥﹏╥")
-        case 1:
-            score += 1
-            print (f"Parece que {str(in_both)} esta en la cadena!!")
-            print ("+ (1) punto")
-        case _:
-            for _ in in_both:
+        
+    if len(in_both) == len(org_chain):
+        flagT.append(True) 
+    else:
+        flagT.append(False) 
+        match len(in_both):
+            case 0:
+                time.sleep(2)
+                print("No le atinaste ni a una (ㆆ_ㆆ)")
+            case 1:
                 score += 1
-            print (f"Parece que {str(in_both)} estan en la cadena!!")
-            print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
-            print (f"+ ({len(in_both)}) puntos")
+                time.sleep(2)
+                print (f"Parece que {str(in_both)} esta en la cadena!!")
+                print ("+ (1) punto")
+            case _:
+                for _ in in_both:
+                    score += 1
+                time.sleep(2)
+                print("( ͠❛ ₒ͠❛ ) ¿¿¿¿Te llamas Akinator????")
+                print (f"Parece que {str(in_both)} estan en la cadena!!")
+                print (f"+ ({len(in_both)}) puntos")
+
+    if all.flagT() == True:
+        flag = True 
+    else:
+        flag = False 
     return score, flag 
 ```
 ```mermaid 
@@ -231,19 +262,17 @@ flowchart TD;
 
 Registra el nombre del jugador y su puntaje en un diccionario.
 ```python
-    def history(name:str, score:int) -> dict:
-    user_tries = []
+def history(user_tries:list, name:str, score:int) -> dict:
     partida = {
         "Nombre" : name,
         "Puntaje" : score
     }
     user_tries.append(partida)
-    sorted(user_tries, reversed= True)
+    
+    user_tries.sort(key=lambda x: x["Puntaje"], reverse=True)
 
-    rank : int = 1
-    for dic in user_tries:
+    for rank, dic in enumerate(user_tries, start= 1):
         dic["rank"] = rank
-        rank += 1
 
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
     return user_tries_tab
@@ -303,6 +332,7 @@ flowchart TD;
 
 Esta función se asegura de que en la respuesta del usuario solo haya caracteres permitidos por la configuración.
 ```python
+def validar_entrada(usuario_input:str, configuration:dict) -> bool:
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         if configuration["Capital"] == "mayusculas":
@@ -468,7 +498,6 @@ def combinacion_aleatorea(configuration:dict) -> list:
     options_string = "".join(options)
     lon = configuration["Amount"]
 
-    # Generar cadena aleatoria
     if configuration["Repetition"] == "no":
         chain = "".join(random.sample(options_string, lon))
     else:
@@ -511,6 +540,334 @@ flowchart TD
     T --> U["Fin"];
 
 ```
+## Función principal 
+*-if __name__ == "__main__":*
+
+La función main gestiona el flujo del juego, permite al usuario interactuar con las configuraciones del juego, y evalúa su desempeño , mientras controla las vidas y el puntaje.
+```python
+if __name__ == "__main__":
+    configuration : dict = {} # Guarda la configuracion de juego
+    user_tries = [] # Guarda el leaderboard
+
+    # Bucle para permitir al usuario jugar varias veces
+    while True:
+        print("\n...Bienvenido a...")
+        print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
+        name = input("¿Como te llamas?: ")
+        print(f"¿List@ para divertirte {name}? :D") #Guarda el user de la partida 
+        print("Te hare 5 preguntas →")
+        #se llama a la configuración del juego que va a crear el diccionario con los datos de la partida
+        start = configuration_defs.configuration_game(configuration) 
+        print(f"\n{start}") #se imprime el start que esta formateado con tabulate y se le muestra al usuario
+        #se crea el string aleatorio segun las configuracions del juego
+        org_chain = configuration_defs.combinacion_aleatorea(configuration)
+        print(org_chain)
+
+        hiden_chain = "*" * len(org_chain) #se "esconden" los valores de la cadena imprimiendo asteriscos por cada caracter
+        print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
+
+        #se utiliza el estring creado por aletaorio, y se vuelve una lista que contiene sus caracteres 
+        l_original = functionality_defs.strToList(org_chain)
+        #inicializa la string del user 
+        user_chain = input("Ingresa tu secuencia de inicio: ")
+        l_user = functionality_defs.strToList(user_chain) # se convierte en lista la string del user 
+        score : int = score_defs.compareLengths(l_original, l_user) # se inicializa el puntaje del juego
+        penalty : int = 0 
+        flag : bool = functionality_defs.validar_entrada(user_chain, configuration) # se iniciliza la flag que permite o no el inicio del juego
+        win : bool = False # se inicializa la bandera bool que contiene si el jugador ha ganado o no
+        
+        if score == -1 and flag == False:
+            penalty = score 
+            print ("Revisa bien la configuracion con la que estas jugando:")
+            print(f"\n{start}")
+            functionality_defs.cargando (". . .")
+            print ("¿Ya?")
+            user_chain = input("Ingresa la secuencia de inicio de nuevo, esta vez hazlo bien. (乛-乛)")
+            l_user = functionality_defs.strToList(user_chain)
+            score = score_defs.compareLengths(l_original, l_user)
+            flag = functionality_defs.validar_entrada(user_chain, configuration)
+        elif score == -1 and flag == False:
+            print ("GAME OVER, POR FEA")
+
+        elif score == 0 and flag == True:
+            if penalty != 0:
+                score += penalty
+            print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+            
+        if configuration.get("Lifes") == "infinitos":
+            match configuration.values():
+                case {"Data": "letras", "Capital": "ambas"}:
+                    while not win:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "ambas"}:
+                    while not win:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "letras", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "letras", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "numeros"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+        elif configuration.get("Lifes") in {3, 5, 10}:
+            lifes = configuration.get("Lifes")
+            match configuration.values():
+                case {"Data": "letras", "Capital": "ambas"}:
+                    while not win and lifes > 0:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break  
+
+                case {"Data": "ambos", "Capital": "ambas"}:
+                    while not win and lifes > 0:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break
+                
+                case {"Data": "ambos", "Capital": "minusculas"}:
+                    while not win and lifes > 0:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break    
+
+                case {"Data": "ambos", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+                case {"Data": "letras", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+                case {"Data": "letras", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break   
+
+                case {"Data": "numeros"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+```
+```mermaid 
+flowchart TD;
+    A[Inicio] --> B[Mostrar bienvenida]
+    B --> C[Solicitar nombre al usuario]
+    C --> D[Mostrar preguntas y configuracion]
+    D --> E[Generar secuencia aleatoria]
+    E --> F[Ocultar secuencia con asteriscos]
+    F --> G[Solicitar secuencia de usuario]
+    G --> H[Convertir secuencia de usuario a lista]
+    H --> I[Comparar secuencias y calcular puntaje]
+    I --> J{¿Entrada inválida o configuración incorrecta?}
+    J -->|Sí| G
+    J -->|No| L{¿Secuencia correcta?}
+    L -->|No| M[Iniciar partida]
+    L -->|Sí| N[Fin del juego]
+    M --> O{¿Lifes infinitos?}
+    O -->|Sí| P[Iniciar juego con reglas infinitas]
+    O -->|No| Q{¿Lifes 3, 5, 10?}
+    Q -->|Sí| R[Iniciar juego con reglas de vidas limitadas]
+    Q -->|No| N
+    P --> T[Comparar secuencias y calcular puntaje]
+    T --> U{¿Juego ganado?}
+    U -->|Sí| V[Mostrar mensaje de victoria]
+    V --> N
+    U -->|No| W[Mostrar mensaje de derrota]
+    R --> T
+    W --> X{¿Reintentar juego?}
+    X -->|Sí| Y[Registrar puntaje y continuar]
+    X -->|No| Z[Mostrar agradecimiento y salir]
+    Y --> B
+    Z --> N
+    
+
+```
+
 ***
 ---
 ## Instalación de R4nd.M1n1ng
