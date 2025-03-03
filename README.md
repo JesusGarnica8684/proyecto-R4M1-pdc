@@ -11,7 +11,7 @@ Se desarrolló el código del juego con una estructura de funciones específicas
 ### Funciones de utilidades 
 *-cargando (text: str):*
 
-Simula un efecto de carga al imprimir caracteres con un breve retrazo.
+Simula un efecto de carga al imprimir caracteres con un breve retraso.
 ```python
 def cargando(text: str):
     for i in text: 
@@ -27,7 +27,7 @@ flowchart TD;
 ```
 *-strToList(secuencia: str) -> list*
 
-Convierte un string en una lista de caracteres para facilitar el analisis de datos. 
+Convierte un string en una lista de caracteres para facilitar el análisis de datos.
 ```python
 def strToList (secuencia : str) -> list:
     return list(secuencia) 
@@ -41,7 +41,7 @@ flowchart TD;
 ### Funciones de validación y comparación 
 *-compareLengths(listR: list, listU: list) -> int*
 
-Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden penaliza al usuario.
+Compara la longitud de la respuesta del usuario con respecto a la lista generada por el sistema, y si no coinciden, penaliza al usuario.
 ```python
 def compareLengths (listR, listU : list) -> int:
     score : int = 0
@@ -76,7 +76,7 @@ flowchart TD;
 ```
 *-compareCapnoCap(listR: list, listU: list) -> tuple[int, bool]*
 
-Esta funcion identifica los caracteres con capitalizacion correcta en la respuesta del usuario en comparacion con la secuencia oculta y otorga los respectivos puntos. 
+Esta función identifica los caracteres con capitalización correcta en la respuesta del usuario en comparación con la secuencia oculta y otorga los respectivos puntos.
 
 ```python
 def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
@@ -135,7 +135,7 @@ flowchart TD;
 ```
 *-compare_index(user_chain: str, org_chain: str, score: int) -> tuple[int, bool]*
 
-Esta funcion identifica los caracteres que coinciden en posicion en ambas listas. 
+Esta función identifica los caracteres que coinciden en posición en ambas listas. 
 
 ```python
 def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]:
@@ -301,7 +301,7 @@ flowchart TD;
 ```
 *-validar_entrada(usuario_input: str, configuration: dict) -> bool*
 
-Esta funcion se asegura de que en la respuesta del usuario solo hayan caracteres permitidos por la configuracion.
+Esta función se asegura de que en la respuesta del usuario solo haya caracteres permitidos por la configuración.
 ```python
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
@@ -354,7 +354,7 @@ flowchart TD;
 ```
 *-configuration_game(configuration: dict) -> dict*
 
-Pide al usuario definir los parametros con los q va a jugar, parametro como: tipo de caracter, mayusculas / minusculas, repeticion de caracteres, etc.
+Pide al usuario definir los parámetros con los que va a jugar, como el tipo de carácter, mayúsculas/minúsculas, repetición de caracteres, etc.
 ```python
 def configuration_game(configuration:dict) -> dict: 
     while True:
@@ -444,7 +444,7 @@ flowchart TD;
 ```
 *-combinacion_aleatorea(configuration: dict) -> list*
 
-Genera la cadena aleatoria basada en las configuraciones.
+Genera una cadena aleatoria basada en la configuración establecida.
 ```python
 def combinacion_aleatorea(configuration:dict) -> list: 
     options = [] 
