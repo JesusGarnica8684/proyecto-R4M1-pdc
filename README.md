@@ -3,13 +3,13 @@
 ## Un proyecto de Cobra Kode
 ![](Logo/logo-cobra-kode.png)
 ## Introduccion 
-El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng**, un juego el cual consiste en la generacion y adivinanza de una serie de caracteres aleatorios. El objetivo es que el usuario descubra la secuencia ocualta mediante intentos sucesivos y un sistema de puntuacion.
+El siguiente repositorio describe el desarrollo e implementación de **R4nd.M1n1ng**, un juego que consiste en la generación y adivinanza de una serie de caracteres aleatorios. El objetivo es que el usuario descubra la secuencia oculta mediante intentos sucesivos y un sistema de puntuación.
 ***
 ## Cómo se abordó el problema
-Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
+Se desarrolló el código del juego con una estructura de funciones específicas. A continuación, se presenta cada una de ellas y su propósito dentro del juego: 
 
 ### Funciones de utilidades 
-### -cargando (text: str):
+"-cargando (text: str):"
 
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
 ```python
