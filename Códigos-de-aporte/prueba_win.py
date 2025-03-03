@@ -15,12 +15,9 @@ def history(user_tries:list, name:str, score:int) -> dict:
         "Puntaje" : score
     }
     user_tries.append(partida)
-    sorted(user_tries, reverse= True)
 
-    rank : int = 1
-    for dic in user_tries:
+    for rank, dic in enumerate(user_tries, start= 1):
         dic["rank"] = rank
-        rank += 1
 
     # Imprimir el diccionario en forma de tabla
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
