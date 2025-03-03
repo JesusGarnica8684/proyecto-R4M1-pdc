@@ -3,17 +3,17 @@ import string
 from tabulate import tabulate
 import time 
 
-#Def print de carga, for a dramatic flare 
+# Print de carga, for a dramatic flare 
 def cargando(text: str):
     for i in text: # recorre cada caracter del string
         print(i, end="") # va imprimiendolo uno por uno conforme avanza
         time.sleep(0.2) # retrasa la siguiente accion 2 decimas de segundo
 
-#Def string a lista (va a utilizarse tanto para lista con la respuesta como la que ingresar el usuario) 
+# String a lista (Parar lista-respuesta y lista-usuario) 
 def strToList (secuencia : str) -> list:
     return list(secuencia)
 
-#Def comparar lista- respuesta con lista-usuario (se revisa que las dos sean iguales de largas, sino, se resta 1 punto)
+# Comparar lista-respuesta con lista-usuario (Revisa que las dos sean iguales de largas)
 def compareLengths (listR, listU : list) -> int:
     score : int = 0
     if len(listR) == len(listU):
@@ -35,16 +35,16 @@ def compareLengths (listR, listU : list) -> int:
         cargando("(-1) punto, por atembao") 
     return score
         
-#Def comparar mayusculas minúsculas de las listas
+#! Comparar mayusculas minúsculas de las listas
 def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
     score : int = 0
     capU : list = []
     noCapU : list = []
     flagT : tuple = []
     for i in listU:
-        if i.isalpha() and i.isupper():  # Verificar si el carácter es alfabético y mayúscula
+        if i.isalpha() and i.isupper(): # Verificar si el carácter es alfabético y mayúscula
             capU.append(i)
-        elif i.isalpha() and i.islower():  # Verificar si el carácter es alfabético y minúscula
+        elif i.isalpha() and i.islower(): # Verificar si el carácter es alfabético y minúscula
             noCapU.append(i) 
     for i in listR:
         if i in capU and i in noCapU:
@@ -77,8 +77,8 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
         flag = False 
     return score, flag  
 
+# Verifica si la entrada del usuario contiene solo caracteres permitidos
 def validar_entrada(usuario_input:str, configuration:dict) -> bool:
-    #Verifica si la entrada del usuario contiene solo caracteres permitidos.
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         if configuration["Capital"] == "mayusculas":
@@ -197,8 +197,8 @@ def combinacion_aleatorea(configuration:dict) -> list:
 
     return chain_list
 
-# Crea una lista con los caracteres que coinciden en posicion
-def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]:
+#! Crea una lista con los caracteres que coinciden en posicion
+def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
     both_index = []
     bot = zip(org_chain, user_chain)
     both = list(bot)
@@ -223,8 +223,9 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple [int, bool]
             print (f"+ ({len(both_index)}) puntos")
     return score, flag
 
-# Crea una lista de los caracteres que coinciden en ambas listas
+#! Crea una lista de los caracteres que coinciden en ambas listas
 def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
+    flagT : tuple = []
     in_both = []
     for char in user_chain:
         if char in org_chain:
@@ -245,14 +246,57 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
             print (f"Parece que {str(in_both)} estan en la cadena!!")
             print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
             print (f"+ ({len(in_both)}) puntos")
+
+    if all.flagT() == True:
+        flag = True 
+    else:
+        flag = False 
     return score, flag 
 
+def history(name:str, score:int) -> dict:
+    user_tries = []
+    user_tries["Nombre"] = name
+    user_tries["Puntaje"] = score
+
+    # Imprimir el diccionario en forma de tabla
+    user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
+    return user_tries_tab
+
+def game_start(configuration:dict):
+    if configuration.get("Lifes") == "infinitos":
+        match configuration.values():
+            case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                while win == False:
+                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                    score += tuplaCapnoCap[0]
+                    flagCap = tuplaCapnoCap[1]
+            case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
+                while win == False:
+                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                    score += tuplaCapnoCap[0]
+                    flagCap = tuplaCapnoCap[1]
+
+    if configuration.get("Lifes") in {3, 5, 10}:
+        match configuration.values():
+            case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                lifes = configuration.get("Lifes")
+                for _ in range(lifes):
+                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                    score += tuplaCapnoCap[0]
+                    flagCap = tuplaCapnoCap[1]
+            case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
+                xxx
+        if win == True:
+            history(name, score)
+
+
 if __name__ == "__main__":
-    configuration = {}
+    configuration : dict = {}
 
     print("\n...Bienvenido a...")
     print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
-    print("¿Listo para divertirte? :D")
+    name = input("¿Como te llamas?: ")
+    print(f"¿Listo para divertirte {name}? :D")
     print("Te hare 5 preguntas →")
 
     start = configuration_game(configuration)
@@ -288,29 +332,19 @@ if __name__ == "__main__":
         if penalty != 0:
             score += penalty
         print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+        game_game = game_start(configuration)
 
-        if configuration.get("Lifes") == "infinitos":
-            match configuration.values():
-                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                    while win == False:
-                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                        score += tuplaCapnoCap[0]
-                        flagCap = tuplaCapnoCap[1]
-                case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
-                    while win == False:
-                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                        score += tuplaCapnoCap[0]
-                        flagCap = tuplaCapnoCap[1]
-        if configuration.get("Lifes") in {3, 5, 10}:
-            match configuration.values():
-                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                    lifes = configuration.get("Lifes")
-                    for _ in range(lifes):
-                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                        score += tuplaCapnoCap[0]
-                        flagCap = tuplaCapnoCap[1]
-                case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
-                    xxx
+#-----------------------------------------------------------------------------------------
+    while True:
+        dead : bool = False
+        q_dead = input("¿Quieres jugar otra vez?: ")
+        if q_dead == "si":
+            dead = False
+        elif q_dead == "no":
+            dead = True
+            break
+
+#----------------------------------------------------------------------------------------
 
     #user_chain = input("Ingresa tu secuencia de inicio: ")
     #play = compare_exist(user_chain, org_chain, score)
