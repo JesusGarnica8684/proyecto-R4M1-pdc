@@ -9,7 +9,7 @@ El siguiente repositorio descrbe el desarrollo e implementacion de **R4nd.M1n1ng
 Se desarrolló el codigo del jeugo con una estructura de funciones especificas, Aqui cada una de ellas y su proposito dentro del juego: 
 
 ## Funciones de utilidades 
-## -cargando (text: str):
+# -cargando (text: str):
 
 Simula un efecto de carga al imprimir caracteres con un breve retrazo.
 ```python
