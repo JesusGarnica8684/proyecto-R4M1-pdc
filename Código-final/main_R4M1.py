@@ -51,185 +51,250 @@ if __name__ == "__main__":
                 score += penalty
             print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
             
-            if configuration.get("Lifes") == "infinitos":
-                match configuration.values():
-                    case {"Data": "letras", "Capital": "ambas"}:
-                        while win == False:
-                            tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                            score += tuplaCapnoCap(0)
-                            flagCap = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-                    case {"Data": "ambos", "Capital": "ambas"}:
-                        while win == False:
-                            tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                            score += tuplaCapnoCap(0)
-                            flagCap = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-                    case {"Data": "ambos", "Repetition": "no", "Capital": "minusculas"}:
-                        while win == False:
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-                    case {"Data": "ambos", "Repetition": "si", "Capital": "mayusculas"}:
-                        while win == False:
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-                    case {"letras": "ambos", "Repetition": "no", "Capital": "minusculas"}:
-                        while win == False:
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-                    case {"Data": "letras", "Repetition": "si", "Capital": "mayusculas"}:
-                        while win == False:
-                            tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagExist = tuplaCapnoCap[1]
-                            time.sleep(2)
-                            tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                            score += tuplaCapnoCap(0)
-                            flagIndex = tuplaCapnoCap[1]
-                            if flagCap and flagExist and flagIndex == True:
-                                win = True 
-                            else: 
-                                win = False
-                                time.sleep(2) 
-            elif configuration.get("Lifes") in {3, 5, 10}:
-                match configuration.values():
-                    case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                        lifes = configuration.get("Lifes")
-                        for _ in range(lifes):
-                            while win == False:
-                                tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                                score += tuplaCapnoCap(0)
-                                flagCap = tuplaCapnoCap[1]
-                                tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagExist = tuplaCapnoCap[1]
-                                tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagIndex = tuplaCapnoCap[1]
-                                if flagCap and flagExist and flagIndex == True:
-                                    win = True 
-                                else: 
-                                    win = False 
-                    case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
-                        lifes = configuration.get("Lifes")
-                        for _ in range(lifes):
-                                tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                                score += tuplaCapnoCap(0)
-                                flagCap = tuplaCapnoCap[1]
-                                tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagExist = tuplaCapnoCap[1]
-                                tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagIndex = tuplaCapnoCap[1]
-                                if flagCap and flagExist and flagIndex == True:
-                                    win = True 
-                                else: 
-                                    win = False 
-                    case {"Data": "ambas", "Repetition": "si", "Capital": "ambas"}:
-                        lifes = configuration.get("Lifes")
-                        for _ in range(lifes):
-                                tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                                score += tuplaCapnoCap(0)
-                                flagCap = tuplaCapnoCap[1]
-                                tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagExist = tuplaCapnoCap[1]
-                                tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagIndex = tuplaCapnoCap[1]
-                                if flagCap and flagExist and flagIndex == True:
-                                    win = True 
-                                else: 
-                                    win = False 
-                    case {"Data": "ambas", "Repetition": "no", "Capital": "ambas"}:
-                        lifes = configuration.get("Lifes")
-                        for _ in range(lifes):
-                                tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                                score += tuplaCapnoCap(0)
-                                flagCap = tuplaCapnoCap[1]
-                                tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagExist = tuplaCapnoCap[1]
-                                tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagIndex = tuplaCapnoCap[1]
-                                if flagCap and flagExist and flagIndex == True:
-                                    win = True 
-                                else: 
-                                    win = False 
-                    case {"Data": "ambas", "Repetition": "si", "Capital": "ambas"}:
-                        lifes = configuration.get("Lifes")
-                        for _ in range(lifes):
-                                tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
-                                score += tuplaCapnoCap(0)
-                                flagCap = tuplaCapnoCap[1]
-                                tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagExist = tuplaCapnoCap[1]
-                                tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
-                                score += tuplaCapnoCap(0)
-                                flagIndex = tuplaCapnoCap[1]
-                                if flagCap and flagExist and flagIndex == True:
-                                    win = True 
-                                else: 
-                                    win = False
-            #-------------------------------------------------------------------------
-            elif win == True:
+        if configuration.get("Lifes") == "infinitos":
+            match configuration.values():
+                case {"Data": "letras", "Capital": "ambas"}:
+                    while not win:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "ambas"}:
+                    while not win:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "ambos", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "letras", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "letras", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+                case {"Data": "numeros"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+
+        elif configuration.get("Lifes") in {3, 5, 10}:
+            lifes = configuration.get("Lifes")
+            match configuration.values():
+                case {"Data": "letras", "Capital": "ambas"}:
+                    while not win and lifes > 0:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break  
+
+                case {"Data": "ambos", "Capital": "ambas"}:
+                    while not win and lifes > 0:
+                        tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break
+                
+                case {"Data": "ambos", "Capital": "minusculas"}:
+                    while not win and lifes > 0:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break    
+
+                case {"Data": "ambos", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+                case {"Data": "letras", "Capital": "mayusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+                case {"Data": "letras", "Capital": "minusculas"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break   
+
+                case {"Data": "numeros"}:
+                    while not win:
+                        tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win = True  
+                        else:
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break 
+
+
+
+                        
+
+#-------------------------------------------------------------------------
+    elif win == True:
                 functionality_defs.cargando("GANASTEEEEEEEEEEEEEEEEE")
             elif win == False:
                 functionality_defs.cargando("PERDISTEEEEEEEEEEEEEEEEE")
