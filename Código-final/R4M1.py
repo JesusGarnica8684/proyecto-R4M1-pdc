@@ -255,8 +255,17 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
 
 def history(name:str, score:int) -> dict:
     user_tries = []
-    user_tries["Nombre"] = name
-    user_tries["Puntaje"] = score
+    partida = {
+        "Nombre" : name,
+        "Puntaje" : score
+    }
+    user_tries.append(partida)
+    sorted(user_tries, reversed= True)
+
+    rank : int = 1
+    for dic in user_tries:
+        dic["rank"] = rank
+        rank += 1
 
     # Imprimir el diccionario en forma de tabla
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
