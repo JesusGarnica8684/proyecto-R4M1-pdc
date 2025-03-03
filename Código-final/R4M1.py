@@ -271,34 +271,6 @@ def history(name:str, score:int) -> dict:
     user_tries_tab = tabulate(user_tries, headers= "keys", tablefmt= "grid")
     return user_tries_tab
 
-def game_start(configuration:dict):
-    if configuration.get("Lifes") == "infinitos":
-        match configuration.values():
-            case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                while win == False:
-                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                    score += tuplaCapnoCap[0]
-                    flagCap = tuplaCapnoCap[1]
-            case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
-                while win == False:
-                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                    score += tuplaCapnoCap[0]
-                    flagCap = tuplaCapnoCap[1]
-
-    if configuration.get("Lifes") in {3, 5, 10}:
-        match configuration.values():
-            case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
-                lifes = configuration.get("Lifes")
-                for _ in range(lifes):
-                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                    score += tuplaCapnoCap[0]
-                    flagCap = tuplaCapnoCap[1]
-            case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
-                xxx
-        if win == True:
-            history(name, score)
-
-
 if __name__ == "__main__":
     configuration : dict = {}
 
@@ -341,8 +313,32 @@ if __name__ == "__main__":
         if penalty != 0:
             score += penalty
         print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
-        game_game = game_start(configuration)
+        
+        if configuration.get("Lifes") == "infinitos":
+            match configuration.values():
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                    while win == False:
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+                case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
+                    while win == False:
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
 
+        if configuration.get("Lifes") in {3, 5, 10}:
+            match configuration.values():
+                case {"Data": "letras", "Repetition": "si", "Capital": "ambas"}:
+                    lifes = configuration.get("Lifes")
+                    for _ in range(lifes):
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+                case {"Data": "letras", "Repetition": "no", "Capital": "ambas"}:
+                    xxx
+            if win == True:
+                history(name, score)
 #-----------------------------------------------------------------------------------------
     while True:
         dead : bool = False
