@@ -16,6 +16,7 @@ def history(user_tries:list, name:str, score:int) -> dict:
     }
     user_tries.append(partida)
     
+    #Ordenar la lista de intentos por puntaje de mayor a menor
     user_tries.sort(key=lambda x: x["Puntaje"], reverse=True)
 
     for rank, dic in enumerate(user_tries, start= 1):
