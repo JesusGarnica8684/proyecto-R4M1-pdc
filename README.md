@@ -531,17 +531,17 @@ Antes de comenzar, asegúrate de tener instalado:
   ```
 ### Instalación 
 1. Clona el repositorio o descarga el código fuente.
-    ```bash
-    git clone https://github.com/tu-usuario/R4nd.M1n1ng.git
-    cd R4nd.M1n1ng
-    ```
+ ```bash
+ git clone https://github.com/tu-usuario/R4nd.M1n1ng.git
+ cd R4nd.M1n1ng
+ ```
 2. Instala las dependencias necesarias.
 
 ### Ejecución 
 Para iniciar el juego, usa el siguiente comando dentro del directorio del proyecto: 
-    ```bash
-    - python main.py
-    ```
+```bash
+- python main.py
+```
 ***
 ## Colaboradores:
 * Juan Manuel Dávila Dominguez
