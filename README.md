@@ -513,12 +513,41 @@ flowchart TD
 ```
 ***
 ---
+## Instalación de R4nd.M1n1ng
+
+Sigue estos pasos para instalar y ejecutar el juego en tu sistema.
+
+###  Requisitos Previos
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- *Python 3.8 o superior* 
+  Puedes descargarlo desde [python.org](https://www.python.org/downloads/).
+
+- *Pip (gestor de paquetes de Python)* 
+  Para verificar si lo tienes instalado, ejecuta:  
+  ```bash
+  pip --version
+### Instalación 
+1. Clona el repositorio o descarga el código fuente.
+```python
+git clone https://github.com/tu-usuario/R4nd.M1n1ng.git
+cd R4nd.M1n1ng
+```
+2. Instala las dependencias necesarias.
+
+### Ejecución 
+Para iniciar el juego, usa el siguiente comando dentro del directorio del proyecto: 
+```python
+- python main.py
+```
+***
 ## Colaboradores:
 * Juan Manuel Dávila Dominguez
 * Zaida Alejandra Guzman Martínez
 * Laura Mariana de Jesús García Garnica
 ***
-# Referencias
+## Referencias
 * https://labex.io/es/tutorials/python-how-to-implement-time-delays-in-python-420943
 * https://www.geeksforgeeks.org/how-to-add-time-delay-in-python/
 * https://www.reddit.com/r/learnpython/comments/qa1g75/how_to_print_one_character_at_a_time_slowly_in/?rdt=52729
