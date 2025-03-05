@@ -17,15 +17,16 @@ if __name__ == "__main__":
         print("Te hare 5 preguntas →")
         
         # Configuración del juego
-        start = configuration_defs.configuration_game(configuration) 
-        print(f"\n{start}") #se imprime el start que esta formateado con tabulate y se le muestra al usuario
+        start = configuration_defs.configuration_game(configuration)
+        print(f"\nConfiguración del juego: {configuration}")  # Verificar la configuración
+        print(f"\n{start}")  # Verificar el formato de la tabla
         
         # Crear la cadena aleatoria según las configuraciones del juego
         org_chain = configuration_defs.combinacion_aleatorea(configuration)
-        print(org_chain)
+        print(f"\nCadena original generada: {org_chain}")  # Verificar la cadena generada
 
         hiden_chain = "*" * len(org_chain) #se "esconden" los valores de la cadena imprimiendo asteriscos por cada caracter
-        print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
+        print(f"\nIntenta adivinar �( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
 
         # Convertir la cadena original en una lista
         l_original = functionality_defs.strToList(org_chain)
@@ -38,6 +39,9 @@ if __name__ == "__main__":
         flag : bool = functionality_defs.validar_entrada(user_chain, configuration) # se iniciliza la flag que permite o no el inicio del juego
         win : bool = False # se inicializa la bandera bool que contiene si el jugador ha ganado o no
         
+        print(f"\n¿Entrada válida? {flag}")  # Verificar si la entrada es válida
+        print(f"Puntaje después de comparar longitudes: {score}")  # Verificar el puntaje
+
         if score == -1 and flag == False:
             penalty = score 
             print ("Revisa bien la configuracion con la que estas jugando:")
@@ -62,17 +66,24 @@ if __name__ == "__main__":
             again : int = 0
             while not win:
                 if configuration.get("Data") == "letras" and configuration.get("Capital") == "ambas":
+                    print("\nConfiguración: letras y ambas capitalizaciones")  # Verificar el caso
                     tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
                     score += tuplaCapnoCap[0]
                     flagCap = tuplaCapnoCap[1]
+                    print(f"\nPuntaje después de comparar capitalización: {score}")  # Verificar puntaje
+                    print(f"¿Coincide la capitalización? {flagCap}")  # Verificar flag de capitalización
 
                     tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
                     score += tuplaExist[0]
                     flagExist = tuplaExist[1]
+                    print(f"\nPuntaje después de comparar existencia: {score}")  # Verificar puntaje
+                    print(f"¿Existen los caracteres? {flagExist}")  # Verificar flag de existencia
 
                     tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
                     score += tuplaIndex[0]
                     flagIndex = tuplaIndex[1]
+                    print(f"\nPuntaje después de comparar índices: {score}")  # Verificar puntaje
+                    print(f"¿Coinciden los índices? {flagIndex}")  # Verificar flag de índices
 
                     if flagCap and flagExist and flagIndex:
                         win = True
@@ -80,25 +91,38 @@ if __name__ == "__main__":
                         user_chain = input("Intenta de nuevo: ")
                         l_user = functionality_defs.strToList(user_chain)
                         again += 1
+                        print(f"\nIntento #{again}")
+                        print(f"Cadena del usuario: {user_chain}")
+                        print(f"Cadena original: {org_chain}")
+                        print(f"Puntaje actual: {score}")
+                        print(f"¿Ganó? {win}")
 
                 # Otros casos de configuración...
 
         # Configuración de vidas limitadas
         elif configuration.get("Lifes") in {3, 5, 10}:
             lifes = configuration.get("Lifes")
+            print(f"\nVidas restantes: {lifes}")  # Verificar vidas restantes
             while not win and lifes > 0:
                 if configuration.get("Data") == "letras" and configuration.get("Capital") == "ambas":
+                    print("\nConfiguración: letras y ambas capitalizaciones")  # Verificar el caso
                     tuplaCapnoCap = score_defs.compareCapnoCap(l_original, l_user)
                     score += tuplaCapnoCap[0]
                     flagCap = tuplaCapnoCap[1]
+                    print(f"\nPuntaje después de comparar capitalización: {score}")  # Verificar puntaje
+                    print(f"¿Coincide la capitalización? {flagCap}")  # Verificar flag de capitalización
 
                     tuplaExist = score_defs.compare_exist(user_chain, org_chain, score)
                     score += tuplaExist[0]
                     flagExist = tuplaExist[1]
+                    print(f"\nPuntaje después de comparar existencia: {score}")  # Verificar puntaje
+                    print(f"¿Existen los caracteres? {flagExist}")  # Verificar flag de existencia
 
                     tuplaIndex = score_defs.compare_index(user_chain, org_chain, score)
                     score += tuplaIndex[0]
                     flagIndex = tuplaIndex[1]
+                    print(f"\nPuntaje después de comparar índices: {score}")  # Verificar puntaje
+                    print(f"¿Coinciden los índices? {flagIndex}")  # Verificar flag de índices
 
                     if flagCap and flagExist and flagIndex:
                         win = True
@@ -109,6 +133,11 @@ if __name__ == "__main__":
                             break
                         user_chain = input(f"Intenta de nuevo. Te quedan {lifes} vidas: ")
                         l_user = functionality_defs.strToList(user_chain)
+                        print(f"\nIntento #{3 - lifes}")
+                        print(f"Cadena del usuario: {user_chain}")
+                        print(f"Cadena original: {org_chain}")
+                        print(f"Puntaje actual: {score}")
+                        print(f"¿Ganó? {win}")
 
                 # Otros casos de configuración...
 
@@ -117,6 +146,7 @@ if __name__ == "__main__":
             print(f"¡Felicidades {name}! Has ganado con un puntaje de {score}.")
 
         # Al terminar la partida, pregunta al usuario si quiere jugar otra vez
+        print(f"\nPuntaje final: {score}")
         dead = input("¿Quieres jugar otra vez? (si/no): ")
         if dead == "no":
             break

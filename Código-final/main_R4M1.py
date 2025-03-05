@@ -302,15 +302,15 @@ if __name__ == "__main__":
                                 break 
 
 #-------------------------------------------------------------------------
-        elif win == True:
+        if win == True:
             functionality_defs.cargando("GANASTEEEEEEEEEEEEEEEEE")
 
-        # Al terminar la partida, pregunta al usuario si quiero jugar otravez
-        dead = input("¿Quieres jugar otra vez?: ")
-        if dead == "si":
-            functionality_defs.history("\n", name, score) # Mostrar leaderboard
-        elif dead == "no":
-            break
+            # Al terminar la partida, pregunta al usuario si quiero jugar otravez
+            dead = input("¿Quieres jugar otra vez?: ")
+            if dead == "si":
+                functionality_defs.history("\n", name, score) # Mostrar leaderboard
+            elif dead == "no":
+                break
     functionality_defs.history("\n", name, score)
     print("""┏━━━━━━━━━━━━━━━━━━━━━━━┓\n♡   Gracias por jugar   ♡\n┗━━━━━━━━━━━━━━━━━━━━━━━┛""")
     #-------------------------------------------------------------------------
