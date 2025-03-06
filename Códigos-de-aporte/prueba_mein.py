@@ -47,11 +47,13 @@ def configuration_game(configuration:dict) -> dict:
     # Vidas (intentos para adivinar)
     while True:
         lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
-        if lifes_value in {3, 5, 10} or lifes_value :
+        if lifes_value == 3 or lifes_value == 5 or lifes_value == 10 or lifes_value == "infinitos":
+            """
             if lifes_value == "infinitos": 
                 lifes_value = float('inf')
             else: 
                 lifes_value = int(lifes_value)
+            """
             configuration["Lifes"] = lifes_value
             break
         else:
@@ -110,7 +112,7 @@ def strToList (secuencia : str) -> list:
     return list(secuencia)
 
 # Verifica si la entrada del usuario contiene solo caracteres permitidos
-def validar_entrada(usuario_input:str, configuration:dict) -> bool:
+def validate(usuario_input:str, configuration:dict) -> bool:
     allowed_characters = ""
     if configuration["Data"] == "letras" or configuration["Data"] == "ambos":
         if configuration["Capital"] == "mayusculas":
@@ -180,7 +182,7 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
     score : int = 0
     capU : list = []
     noCapU : list = []
-    flagT : tuple = ()
+    flagT : list = []
 
     for i in listU:
         if i.isalpha() and i.isupper(): # Verificar si el carácter es alfabético y mayúscula
@@ -193,28 +195,28 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
             score += 2
             flagT.append(True) 
             time.sleep(2)
-            print (f"Oh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
+            print (f"\nOh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
             print ("Un piko por inteliegente ( ˘ ³˘)♥")
             print ("(+2) puntos")
         elif i in capU and i not in noCapU:
             score += 1
             flagT.append(False) 
             time.sleep(2)
-            print (f"Oh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
+            print (f"\nOh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
             print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
             print ("(+1) punto")
         elif i not in capU and i in noCapU:
             score += 1
             flagT.append(False) 
             time.sleep(2)
-            print (f"Oh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
+            print (f"\nOh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
             print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
             print ("(+1) punto")
         else:  
             time.sleep(2)
-            loading("Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+            loading(f"\n{i} Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
 
-    if all.flagT() == True:
+    if all(flagT) == True:
         flag = True 
     else:
         flag = False 
@@ -222,7 +224,7 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
 
 # Crea una lista con los caracteres que coinciden en posicion
 def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
-    flagT : tuple = ()
+    flagT : list = []
     both_index = []
     bot = zip(org_chain, user_chain)
     both = list(bot)
@@ -254,7 +256,7 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
                 print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
                 print (f"+ ({len(both_index)}) puntos")
 
-    if all.flagT() == True:
+    if all(flagT) == True:
         flag = True 
     else:
         flag = False 
@@ -262,7 +264,7 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
 
 # Crea una lista de los caracteres que coinciden en ambas listas
 def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
-    flagT : tuple = ()
+    flagT : list = []
     in_both = []
     for char in user_chain:
         if char in org_chain:
@@ -291,49 +293,46 @@ def compare_exist(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
                 print (f"Parece que {str(in_both)} estan en la cadena!!")
                 print (f"+ ({len(in_both)}) puntos")
 
-    if all.flagT() == True:
+    if all(flagT) == True:
         flag = True 
     else:
         flag = False 
     return score, flag
 
-def play_game():
-        # Bucle para permitir al usuario jugar varias veces
-    while True:
-        print("\n...Bienvenido a...")
-        print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
-        print("Vamos a crear una cadena aleatorea y luego adivinarla")
+def game_start(configuration:dict) -> bool:
+    game_cont = False
+    penalty : int = 0
+    score : int = 0
 
-        name = input("¿Como te llamas?: ")
-        print(f"¿List@ para divertirte {name}? :D") # Guarda el user de la partida 
-        print("Te hare 5 preguntas →")
-        # Se llama a la configuración del juego que va a crear el diccionario con los datos de la partida
-        start = configuration_game(configuration) 
-        print(f"\n{start}") # Imprime el start que esta formateado con tabulate y se le muestra al usuario
-        
-        #se crea el string aleatorio segun las configuracions del juego
-        org_chain = random_combination(configuration)
-        print(org_chain)
+    print("\n...Bienvenido a...")
+    print("""┏━━━━━━━━━━━━━━━━━┓\n♡   R4nd.M1n1ng   ♡\n┗━━━━━━━━━━━━━━━━━┛""")
+    print("Vamos a crear una cadena aleatorea y luego adivinarla")
 
-        hiden_chain = "*" * len(org_chain) #se "esconden" los valores de la cadena imprimiendo asteriscos por cada caracter
-        print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
+    name = input("¿Como te llamas?: ")
+    print(f"¿List@ para divertirte {name}? :D") # Guarda el user de la partida 
+    print("Te hare 4-5 preguntas →")
 
-        #se utiliza el estring creado por aletaorio, y se vuelve una lista que contiene sus caracteres 
-        l_original = strToList(org_chain)
-        #inicializa la string del user 
-        user_chain = input("Ingresa tu secuencia de inicio: ")
-        l_user = strToList(user_chain) # se convierte en lista la string del user 
-        score : int = compareLengths(l_original, l_user) # se inicializa el puntaje del juego
-        penalty : int = 0 
-        flag : bool = validar_entrada(user_chain, configuration) # se iniciliza la flag que permite o no el inicio del juego
-        win : bool = False # se inicializa la bandera bool que contiene si el jugador ha ganado o no
-        
+    # Se llama a la configuración del juego que va a crear el diccionario con los datos de la partida
+    start = configuration_game(configuration) 
+    print(f"\n{start}") # Imprime las condiciones de cadena que esta formateado con tabulate
+    
+    # Crea el string aleatorio segun las configuracions del juego
+    org_chain = random_combination(configuration)
+    print(org_chain) # Esto no deberia aparecer en el juego pero sirve de validacion
 
+    # "Esconden" los valores de la cadena imprimiendo * por cada caracter
+    hiden_chain = "*" * len(org_chain) 
+    print(f"\nIntenta adivinar ╰( ͡° ͜ʖ ͡° )つ──☆ {hiden_chain}")
 
-if __name__ == "__main__":
-    configuration : dict = {} # Guarda la configuracion de juego
-    user_tries = [] # Guarda el leaderboard
+    # Utiliza el estring creado por aletaorio, y se vuelve una lista que contiene sus caracteres 
+    l_original = strToList(org_chain)
 
+    # Inicializa la string del user
+    user_chain = input("Ingresa tu secuencia de inicio: ")
+    l_user = strToList(user_chain) # Convierte en lista la string del user 
+    score = compareLengths(l_original, l_user) # Inicializa el puntaje del juego
+    flag : bool = validate(user_chain, configuration) # Iniciliza la flag que permite o no el inicio del juego
+    
     if score == -1 and flag == False:
         penalty = score 
         print ("Revisa bien la configuracion con la que estas jugando:")
@@ -343,11 +342,63 @@ if __name__ == "__main__":
         user_chain = input("Ingresa la secuencia de inicio de nuevo, esta vez hazlo bien. (乛-乛)")
         l_user = strToList(user_chain)
         score = compareLengths(l_original, l_user)
-        flag = validar_entrada(user_chain, configuration)
-    elif score == -1 and flag == False:
-        print ("GAME OVER, POR FEA")
-
+        flag = validate(user_chain, configuration)
+    
+        if score == -1 and flag == False:
+            print("GAME OVER, POR FEA")
+            game_cont = False
+        else:
+            game_cont = True
     elif score == 0 and flag == True:
+        game_cont = True
         if penalty != 0:
             score += penalty
-        print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+
+    return user_chain, org_chain, score, l_original, l_user, game_cont
+
+def det_score(configuration:dict, user_chain, org_chain, score, l_original, l_user, win:list) -> list:
+    print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
+    if configuration.get("Lifes") == "infinitos":
+        if configuration.get("Data") == "letras":
+            match configuration.get("Capital"):
+                case "ambas":
+                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                    score += tuplaCapnoCap[0]
+                    flagCap = tuplaCapnoCap[1]
+
+                    tuplaExist = compare_exist(user_chain, org_chain, score)
+                    score += tuplaExist[0]
+                    flagExist = tuplaExist[1]
+
+                    tuplaIndex = compare_index(user_chain, org_chain, score)
+                    score += tuplaIndex[0]
+                    flagIndex = tuplaIndex[1]
+
+                    if flagCap and flagExist and flagIndex:
+                        win.append(True)
+                        print("Correcto")
+                    else:
+                        win.append(False)
+                        print("Estas equivocado")
+    print(win)
+    return win
+
+if __name__ == "__main__":
+    win : list = [] # Inicializa la bandera bool que contiene si el jugador ha ganado o no
+    configuration : dict = {} # Guarda la configuracion de juego
+    user_tries = [] # Guarda el leaderboard
+
+    # Bucle para permitir al usuario jugar varias veces
+    play_again = True
+    while play_again:
+        user_chain, org_chain, score, l_original, l_user, first = game_start(configuration)
+        if first == True:
+            second = det_score(configuration, user_chain, org_chain, score, l_original, l_user, win)
+            if all(second):
+                print("Ganaste")
+                break
+            else:
+                print("Perdiste A")
+        else:
+            print("Perdiste B")
+            break
