@@ -46,14 +46,8 @@ def configuration_game(configuration:dict) -> dict:
 
     # Vidas (intentos para adivinar)
     while True:
-        lifes_value = input("    5- Intentos (3, 5, 10, infinitos): ")
-        if lifes_value == 3 or lifes_value == 5 or lifes_value == 10 or lifes_value == "infinitos":
-            """
-            if lifes_value == "infinitos": 
-                lifes_value = float('inf')
-            else: 
-                lifes_value = int(lifes_value)
-            """
+        lifes_value = int(input("    5- Intentos (3, 5, 10): "))
+        if lifes_value in {3, 5, 10}:  # Usando un conjunto
             configuration["Lifes"] = lifes_value
             break
         else:
@@ -195,26 +189,26 @@ def compareCapnoCap (listR: list, listU : list) -> tuple[int, bool]:
             score += 2
             flagT.append(True) 
             time.sleep(2)
-            print (f"\nOh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
-            print ("Un piko por inteliegente ( ˘ ³˘)♥")
-            print ("(+2) puntos")
+            print(f"\nOh! parece que {i} si se encuentra en la lista tanto en mayuscula como minuscula")
+            print("Un piko por inteliegente ( ˘ ³˘)♥")
+            print("(+2) puntos")
         elif i in capU and i not in noCapU:
             score += 1
             flagT.append(False) 
             time.sleep(2)
-            print (f"\nOh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
-            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
-            print ("(+1) punto")
+            print(f"\nOh! parece que {i} si se encuentra en la lista en mayuscula pero no en minuscula")
+            print("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print("(+1) punto")
         elif i not in capU and i in noCapU:
             score += 1
             flagT.append(False) 
             time.sleep(2)
-            print (f"\nOh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
-            print ("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
-            print ("(+1) punto")
+            print(f"\nOh! parece que {i} si se encuentra en la lista en minuscula pero no en mayuscula")
+            print("A la proxima hazlo mejor, ok? (˶ ⚈ Ɛ ⚈ ˵)")
+            print("(+1) punto")
         else:  
             time.sleep(2)
-            loading(f"\n{i} Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
+            loading(f"\n{listU[i]} Ah dale, obvio, claro, claro (•ิ _•ิ )...")  
 
     if all(flagT) == True:
         flag = True 
@@ -246,15 +240,15 @@ def compare_index(user_chain:str, org_chain:str, score:int) -> tuple[int, bool]:
             case 1:
                 score += 1
                 time.sleep(2)
-                print (f"Parece que {str(both_index)} esta en la posicion correcta!!")
-                print ("+ (1) punto")
+                loading(f"Parece que {str(both_index)} esta en la posicion correcta!!")
+                print("(+1) punto")
             case _:
                 for _ in both_index:
                     score += 1
                 time.sleep(2)
-                print (f"Parece que {str(both_index)} estan en la posicion correcta!!")
-                print ("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
-                print (f"+ ({len(both_index)}) puntos")
+                loading(f"Parece que {str(both_index)} estan en la posicion correcta!!")
+                print("Que pilo eres ᕙ( ͡❛ ͜ʖ ͡❛)ᕗ")
+                print(f"(+{len(both_index)}) puntos")
 
     if all(flagT) == True:
         flag = True 
@@ -358,28 +352,90 @@ def game_start(configuration:dict) -> bool:
 
 def det_score(configuration:dict, user_chain, org_chain, score, l_original, l_user, win:list) -> list:
     print("\n" + " ♥INICIA PARTIDA （*＾ワ＾*)♥ ".center(106, "~"))
-    if configuration.get("Lifes") == "infinitos":
-        if configuration.get("Data") == "letras":
-            match configuration.get("Capital"):
-                case "ambas":
-                    tuplaCapnoCap = compareCapnoCap(l_original, l_user)
-                    score += tuplaCapnoCap[0]
-                    flagCap = tuplaCapnoCap[1]
 
-                    tuplaExist = compare_exist(user_chain, org_chain, score)
-                    score += tuplaExist[0]
-                    flagExist = tuplaExist[1]
+    if configuration.get("Lifes") in {3, 5, 10}:
+        lifes = configuration.get("Lifes")
 
-                    tuplaIndex = compare_index(user_chain, org_chain, score)
-                    score += tuplaIndex[0]
-                    flagIndex = tuplaIndex[1]
+        while lifes != 0:
+            if configuration.get("Data") in {"letras", "ambos"}:
+                match configuration.get("Capital"):
+                    case "mayusculas":
+                        tuplaExist = compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
 
-                    if flagCap and flagExist and flagIndex:
-                        win.append(True)
-                        print("Correcto")
-                    else:
-                        win.append(False)
-                        print("Estas equivocado")
+                        tuplaIndex = compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win.append(True)
+                            print("Correcto")
+                        else:
+                            win.append(False)
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break
+                    case "minusculas":
+                        tuplaExist = compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagExist and flagIndex:
+                            win.append(True)
+                            print("Correcto")
+                        else:
+                            win.append(False)
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break
+                    case "ambas":
+                        tuplaCapnoCap = compareCapnoCap(l_original, l_user)
+                        score += tuplaCapnoCap[0]
+                        flagCap = tuplaCapnoCap[1]
+
+                        tuplaExist = compare_exist(user_chain, org_chain, score)
+                        score += tuplaExist[0]
+                        flagExist = tuplaExist[1]
+
+                        tuplaIndex = compare_index(user_chain, org_chain, score)
+                        score += tuplaIndex[0]
+                        flagIndex = tuplaIndex[1]
+
+                        if flagCap and flagExist and flagIndex:
+                            win.append(True)
+                            print("Correcto")
+                        else:
+                            win.append(False)
+                            lifes -= 1
+                            if lifes == 0:
+                                print("GAME OVER")
+                                break
+            elif configuration.get("Data") == "numeros":
+                tuplaExist = compare_exist(user_chain, org_chain, score)
+                score += tuplaExist[0]
+                flagExist = tuplaExist[1]
+
+                tuplaIndex = compare_index(user_chain, org_chain, score)
+                score += tuplaIndex[0]
+                flagIndex = tuplaIndex[1]
+
+                if flagExist and flagIndex:
+                    win.append(True)
+                    print("Correcto")
+                else:
+                    win.append(False)
+                    lifes -= 1
+                    if lifes == 0:
+                        print("GAME OVER")
+                        break
+        
     print(win)
     return win
 
