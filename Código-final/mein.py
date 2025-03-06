@@ -442,9 +442,9 @@ if __name__ == "__main__":
                 if all(second) == True:
                     loading("Ganasteeeeeeeee")
                 else:
-                    print("Casi pero no, esa no es la cadena")
+                    print("\nCasi pero no, esa no es la cadena")
 
-                dead = input("¿Quieres jugar otra vez?: ")
+                dead = input("\n¿Quieres jugar otra vez?: ")
                 if dead == "si":
                     lead = history(user_tries, name, score) # Mostrar leaderboard
                     print(lead)
